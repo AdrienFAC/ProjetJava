@@ -1,6 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
@@ -63,6 +64,7 @@ public class ImageModel
 			this.couleur = findDominantColor(this.image);
 			this.note = 0;
 			this.temps = System.currentTimeMillis();;
+			this.lst_tags = new ArrayList<String>();
 	    }
 	    catch(IOException e){ System.out.println(e); }
 	}
