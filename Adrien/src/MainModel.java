@@ -7,9 +7,11 @@ public class MainModel
 {
 	List<ImageModel> lst_images;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
-
+		MainModel projet = new MainModel();
+		//Charger fichier XML
+		//Complete les informations
 	}
 	
 	static List<ImageModel> loadImages(String path) throws IOException
@@ -28,7 +30,6 @@ public class MainModel
 	
 	public MainModel() throws IOException
 	{
-		
 		this.lst_images = loadImages("images/");
 	}
 }
