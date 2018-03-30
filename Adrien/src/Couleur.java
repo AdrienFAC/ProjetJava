@@ -1,16 +1,24 @@
+import java.awt.Color;
 
 public class Couleur
 {
-	int r;
-	int g;
-	int b;
-	int a;
-	
-	public Couleur(int r, int g, int b, int a)
+	int nb;
+	Color color;
+
+	public Couleur()
 	{
-		this.r = r;
-		this.g= g;
-		this.b = b;
-		this.a = a;
+		
+	}
+	
+	public Couleur(Color _color)
+	{
+		color = _color;
+		nb = 0;
+	}
+	
+	public int getnb()
+	{
+		return (nb);
 	}
 }
+	
