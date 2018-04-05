@@ -18,6 +18,7 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import projet.ImageModel;
@@ -37,13 +38,18 @@ public class Afficheurtri extends Panel  {
 		
 		
 		public Afficheurtri(ImageModel m , MainModel g){
-			this.setLayout(new FlowLayout());
-			
-			
+
 			Panel p = new Panel();
 			p.setLayout(new BoxLayout(p,BoxLayout.PAGE_AXIS));
-			p.setPreferredSize(new Dimension(200,200));
+			p.setPreferredSize(new Dimension(300,600));
+			
+			
+			JButton precedent = new JButton();
+			precedent.setBounds(250,550 , 150, 50);
+			precedent.setText("précédent");
+			
 			rat = new TextField();
+
 
 			/*for(int j=0;j<m.titre.length();j++){
 				if (m.getTitre().contains((CharSequence) titre)){
@@ -75,30 +81,18 @@ public class Afficheurtri extends Panel  {
 			
 			
 			p.add(taille);
-			p.add(Box.createVerticalStrut(60));
 			p.add(rat);
-			p.add(Box.createVerticalStrut(60));
 			p.add(sup);
-			p.add(Box.createVerticalStrut(20));
 			p.add(titre);
-			p.add(Box.createVerticalStrut(20));
 			p.add(tag);
-			p.add(Box.createVerticalStrut(20));
 			
+			p.add(precedent);
 			
 
 			
 			this.add(p);
 			
-			
-			
-			
-			
-			
-			
-			
-			
-				
+
 				
 			}
 
