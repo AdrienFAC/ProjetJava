@@ -1,4 +1,4 @@
-package test;
+package project;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Canvas;
@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import projet.ImageModel;
+import project.ImageModel;
 
 public class AfficheurImage extends Panel {
 	

@@ -1,26 +1,30 @@
-package test;
+package project;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 
-import projet.ImageModel;
-import projet.MainModel;
+import project.ImageModel;
+import project.MainModel;
 
 public class GestionGr extends Frame implements WindowListener{
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	public static void main(String[] args) throws IOException {
 		new GestionGr();
 	}
 	
 	ImageModel modl;
-	MainModel mm;
+	MainModel mm ;
 	
-	public GestionGr(){
+	public GestionGr() throws IOException{
+		
+		this.mm = new MainModel();
 		
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(1000,1000));
+		this.setPreferredSize(new Dimension(1500,1000));
 		
 		AfficheurImage panneauH = new AfficheurImage(modl);
 		this.add(panneauH, BorderLayout.CENTER);

@@ -1,4 +1,4 @@
-package test;
+package project;
 import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -6,7 +6,7 @@ import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
 
-import projet.ImageModel;
+import project.ImageModel;
 
 public class AfficheurRating extends Panel {
 		TextField t1;

@@ -1,4 +1,5 @@
-package test;
+package project;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,12 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import projet.ImageModel;
+import project.ImageModel;
 
 public class Afficherliste extends Panel {
 	 
-	private Image image2;
-	private ImageIcon image1;
+	
 	
 	
 	public Afficherliste(ImageModel m ) {
@@ -28,7 +28,7 @@ public class Afficherliste extends Panel {
 		p.setLayout(new BorderLayout());
 		
 		JButton suivant = new JButton();
-		suivant.setBounds(800,0 , 80, 20);
+		suivant.setBounds(1400,0 , 80, 20);
 		suivant.setText("suivant");
 		
 
