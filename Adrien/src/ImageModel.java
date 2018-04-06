@@ -19,7 +19,6 @@ public class ImageModel
 {
 	BufferedImage image;
 	public Dimension taille;
-	Color couleur;
 	public String titre;
 	public List<String> lst_tags;
 	int note;
@@ -32,79 +31,34 @@ public class ImageModel
 		String result = fichier.getAbsolutePath().substring(fichier.getAbsolutePath().lastIndexOf("/")+1);
 		return (result.substring(0, result.lastIndexOf(".")));
 	}
-	
-	static void UpdateColorLst(List<Couleur> couleur_lst, int rgb)
-	{
-		int diff;
-		Couleur match = null;
 		
-		for (Couleur c : couleur_lst)
-		{
-			diff = Math.abs(c.color.getRGB() - rgb);
-			if (match == null)
-				match = c;
-			else
-			{
-				if (diff < Math.abs(match.color.getRGB() - rgb))
-				{
-					match = c;
-				}
-			}
-		}
-		match.nb++;
-	}
-	
-	static Color findDominantColor(BufferedImage image)
-	{
-		List<Couleur> couleur_lst = new ArrayList<Couleur>();
-		couleur_lst.add(new Couleur(Color.WHITE));
-		couleur_lst.add(new Couleur(Color.YELLOW));
-		couleur_lst.add(new Couleur(Color.ORANGE));
-		couleur_lst.add(new Couleur(Color.RED));
-		couleur_lst.add(new Couleur(Color.PINK));
-		couleur_lst.add(new Couleur(Color.MAGENTA));
-		couleur_lst.add(new Couleur(Color.BLUE));
-		couleur_lst.add(new Couleur(Color.GREEN));
-		couleur_lst.add(new Couleur(Color.BLACK));
-
-		int y = 0;
-		int x = 0;
-
-		int a = 0;
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		
-		while (x < image.getWidth())
-		{			
-			y = 0;
-			while (y < image.getHeight())
-			{
-				int rgb = image.getRGB(x, y);
-				a = (rgb >> 24) & 0xff;
-			    r = (rgb >> 16) & 0xff;
-			    g = (rgb >> 8) & 0xff;
-			    b = rgb & 0xff;
-			    if (!(r == g && g == b))
-			    	UpdateColorLst(couleur_lst, rgb);
-				y++;
-			}
-			x++;
-		}
-		int save = 0;
-		int i = 0;
-		for (Couleur c : couleur_lst)
-		{
-			if (c.nb > couleur_lst.get(save).nb)
-				save = i;
-			i++;
-		}
-		return (new Color(couleur_lst.get(save).color.getRed(), couleur_lst.get(save).color.getGreen(), couleur_lst.get(save).color.getBlue()));
-	}
-	
 	public ImageModel()
 	{
 		
+	}
+	
+	private int ABS(int a, int b)
+	{
+		return a - b < 0 ? (a - b) * -1 : a - b;
+	}
+	
+	private int TestColor(Color c, int r, int g, int b)
+	{
+		int _r, _g, _b;
+		int marge = (int)(255 * 0.4);
+		
+		_r = (int) (r * 1.1 > 255 ? 255 : r * 1.1);
+		_b = (int) (b * 1.1 > 255 ? 255 : b * 1.1);
+		_g = (int) (g * 1.1 > 255 ? 255 : g * 1.1);
+		if (ABS(c.getRed(), _r) < marge && ABS(c.getBlue(), _b) < marge && ABS(c.getGreen(), _g) < marge)
+			return 1;
+		
+		_r = (int) (r * 0.9 < 0 ? 0 : r * 0.9);
+		_b = (int) (b * 0.9 < 0 ? 0 : b * 0.9);
+		_g = (int) (g * 0.9 < 0 ? 0 : g * 0.9);
+		if (ABS(c.getRed(), _r) < marge && ABS(c.getBlue(), _b) < marge && ABS(c.getGreen(), _g) < marge)
+			return 1;
+		return (0);
 	}
 	
 	public int FindColor(Color c)
@@ -116,7 +70,6 @@ public class ImageModel
 		int g = 0;
 		int b = 0;
 		int result = 0;
-		int marge = 20;
 		
 		while (x < image.getWidth())
 		{			
@@ -125,19 +78,15 @@ public class ImageModel
 			{
 				int rgb = image.getRGB(x, y);
 				a = (rgb >> 24) & 0xff;
-			    r = (rgb >> 16) & 0xff;
-			    g = (rgb >> 8) & 0xff;
+			    g = (rgb >> 16) & 0xff;
+			    r = (rgb >> 8) & 0xff;
 			    b = rgb & 0xff;
-			    System.out.println("Base: " + c.getBlue() + " r:" + r + " +" + (r + r / marge) + " -" + (r - r / marge));
-			    if (((r + r / marge >= c.getRed() && r - r / marge <= c.getRed()))
-			    && ((g + g / marge >= c.getGreen() && g - g / marge <= c.getGreen()))
-			    && ((b + b / marge >= c.getBlue() && b - b / marge <= c.getBlue())))
-			    	result++;
+			    result += TestColor(c, r, g, b);
 				y++;
 			}
 			x++;
 		}
-		return (result);
+		return result;
 	}
 	
 	public ImageModel(String path, String name) throws IOException
@@ -150,10 +99,11 @@ public class ImageModel
 	    	this.image = ImageIO.read(f);
 			this.taille = new Dimension(image.getWidth(), image.getHeight());
 			this.titre = parseTitre(name);
-			this.couleur = findDominantColor(this.image);
 			this.note = 1;
 			this.temps = System.currentTimeMillis();;
 			this.lst_tags = new ArrayList<String>();
+			//Test des couleurs
+			//System.out.println(titre + ": " + thsis.FindColor(Color.RED) + " " + this.FindColor(Color.GREEN) + " " + this.FindColor(Color.BLUE));
 	    }
 	    catch(IOException e){ System.out.println(e); }
 	}
@@ -192,17 +142,7 @@ public class ImageModel
 	{
 		this.note = note;
 	}
-	
-	public Color getCouleur()
-	{
-		return (this.couleur);
-	}
-	
-	public void setCouleur(Color c)
-	{
-		this.couleur = c;
-	}
-	
+		
 	public long getTemps()
 	{
 		return (this.temps);
@@ -213,4 +153,13 @@ public class ImageModel
 		this.temps = temps;
 	}
 	
+	public int getWidth()
+	{
+		return (int) (this.taille.getWidth());
+	}
+	
+	public int getHeight()
+	{
+		return (int) (this.taille.getHeight());
+	}
 }

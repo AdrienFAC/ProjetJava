@@ -23,6 +23,27 @@ public class MainModel
 			System.out.println();			
 		}
 	}
+
+	public void SortByMark(List<ImageModel> lst)
+	{
+		ImageModel save;
+		int finish = 0;
+		int i = 0;
+
+		while (i < lst.size() - 1)
+		{
+			if (lst.get(i).note < lst.get(i + 1).note)
+			{
+				finish = 1;
+				save = lst.remove(i);
+				lst.add(save);
+			}
+			i++;
+		}
+		
+		if (finish == 1)
+			SortByMark(lst);
+	}
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -60,7 +81,7 @@ public class MainModel
 				return (i);
 			i++;
 		}
-		return (-1);		
+		return (-1);
 	}
 	
 	public void deserialize(String outFile)
@@ -85,7 +106,6 @@ public class MainModel
 			if ((exist = IsPresentInList(this.lst_images, img.titre)) >= 0)
 			{
 				this.lst_images.get(exist).note = img.note;
-				this.lst_images.get(exist).couleur = img.couleur;
 				this.lst_images.get(exist).lst_tags = img.lst_tags;
 				this.lst_images.get(exist).temps = img.temps;
 			}
