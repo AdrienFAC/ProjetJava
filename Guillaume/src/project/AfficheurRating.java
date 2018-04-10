@@ -6,6 +6,8 @@ import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
 
+import javax.swing.JButton;
+
 import project.ImageModel;
 
 public class AfficheurRating extends Panel {
@@ -14,14 +16,24 @@ public class AfficheurRating extends Panel {
 
 
 	public AfficheurRating(ImageModel m){
-		this.setLayout(new FlowLayout());
 		Panel p = new Panel();
-		t1 = new TextField("  ");
+		p.setPreferredSize(new Dimension(900,50));
+		t1 = new TextField(" ");
 		Label not = new Label();
 		not.setText("note sur 20");
 		
-		add(t1);
-		add(not);
+		JButton ajouter = new JButton();
+		ajouter.setText("ajouter");
+		
+		JButton enregistrement = new JButton();
+		enregistrement.setText("enregistrement");
+		
+		p.add(enregistrement);
+		p.add(ajouter);
+		p.add(not);
+		p.add(t1);
+		
+		
 		this.add(p);
 		}
 
