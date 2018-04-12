@@ -1,4 +1,4 @@
-package Controlleur;
+package Controleur;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,11 +6,12 @@ import java.util.List;
 import Modele.ImageModel;
 import Modele.MainModel;
 import Vue.AfficheurImage;
+import Vue.GestionGr;
 
 public class GestionImg {
 
 	public List<Modele.ImageModel> choixImg;
-	AfficheurImage imgActu;
+	GestionGr imgActu;
 	ImageModel m;
 	MainModel lst;
 	String titre;
@@ -20,7 +21,6 @@ public class GestionImg {
 	public GestionImg() throws IOException {
 
 		this.lst  = new MainModel();
-		this.imgActu = new AfficheurImage(this.m);
 		this.choixImg = lst.lst_images;
 
 	}
@@ -28,8 +28,8 @@ public class GestionImg {
 
 	public int indexOfImg() {
 
-		this.titre = this.imgActu.im_default.replaceAll("imges/", "");
-		this.titre = this.imgActu.im_default.replaceAll(".jpg", "");
+		this.titre = this.imgActu.img.replaceAll("imges/", "");
+		this.titre = this.imgActu.img.replaceAll(".jpg", "");
 		return lst.IsPresentInList(this.choixImg, this.titre);
 
 	}
@@ -67,8 +67,7 @@ public class GestionImg {
 	public void changeImg(String t) {
 
 		this.titre = "images/" + t + ".jpg";
-		imgActu.im_default = this.titre ;
-		//new AfficheurImage(m, this.titre);
+		imgActu.img = this.titre ;
 
 	}
 

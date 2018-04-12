@@ -1,11 +1,12 @@
-package Controlleur;
+package Controleur;
 
 import Modele.MainModel;
+import Vue.GestionGr;
 
 public class GestionNote {
 	
 	MainModel modele;
-	Vue.AfficheurImage img;
+	GestionGr img;
 	int notation ; 
 	
 	public GestionNote(MainModel mold) {
@@ -20,7 +21,7 @@ public class GestionNote {
 		
 		while(index < this.modele.lst_images.size()) {
 			
-			if(this.modele.lst_images.get(index).titre.contains(this.img.im_default)) {
+			if(this.modele.lst_images.get(index).titre.contains(this.img.img)) {
 				
 				this.notation = n ;
 				
