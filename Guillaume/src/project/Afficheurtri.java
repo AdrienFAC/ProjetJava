@@ -1,6 +1,7 @@
 package project;
 
 import java.awt.Choice;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Panel;
 import java.awt.TextField;
@@ -14,13 +15,14 @@ import javax.swing.JButton;
 
 public class Afficheurtri extends Panel  {
 
-	TextField rat ;
+	Choice couleur= new Choice();
 	Choice taille = new Choice();
-	Choice titre = new Choice();
+	Choice tit = new Choice();
 	Choice tag = new Choice();
 	Choice sup= new Choice();
-	String[] t= {"400x300","640x480","800x600","1024x768","1600x1200","2272x1704","2816x2112","3264x2448","3648x2736","4096x3072","4480x3360","5120x3840","7216x5412","9600x7200"};
+	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
+	HashSet<Note>  k =  new HashSet<Note>();
 
 
 
@@ -30,26 +32,39 @@ public class Afficheurtri extends Panel  {
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
-		p.setPreferredSize(new Dimension(300,800));
+		p.setPreferredSize(new Dimension(300,600));
 
 		JButton precedent = new JButton();
 		precedent.setBounds(250,550 , 150, 50);
 		precedent.setText("precedent");
 
-		rat = new TextField();
+		for (ImageModel img : g.lst_images){
+			Color coul = img.couleur;
+			couleur.add(coul.toString());
+			
+		}
+		
+		for (ImageModel img : g.lst_images){
+			int note = img.note;
+			k.add(new Note(note));
+		}
+		Iterator<Note> t = this.k.iterator();
+		while (t.hasNext()) {
+			not.add(t.next().toString());
+		}
 
-
-		/*for(int j=0;j<m.titre.length();j++){
-				if (m.getTitre().contains((CharSequence) titre)){
-					titre.add(m.getTitre());
-				}
+		for (ImageModel img : g.lst_images){
+			String titre = img.titre;
+			String tt=titre.substring(45,titre.length());
+			tit.add(tt);
 			}
+		
+		for (ImageModel img : g.lst_images){
+			java.util.List<String> ta = img.lst_tags;
+			tag.add(ta.toString());
+		}
 
-			for(int k=0;k<m.lst_tags.size();k++){
-				if (m.lst_tags.contains(tag)){
-					tag.add(m.lst_tags.get(k));
-				}
-			}*/
+
 		if (g.lst_images==null){
 			System.out.println("pas d'images");
 		}
@@ -60,7 +75,6 @@ public class Afficheurtri extends Panel  {
 				h.add(new Taille(largeur,longueur));
 			}
 
-			System.out.println(h);
 
 			Iterator<Taille> it = this.h.iterator();
 			while (it.hasNext()) {
@@ -70,24 +84,25 @@ public class Afficheurtri extends Panel  {
 			taille.add("Grande");
 			taille.add("Moyennes");
 			taille.add("petit");
-			taille.add("supérieur à " + "sup");
-			taille.add("égale à " + "sup");
+			taille.add("supérieur à");
+			taille.add("égale à ");
 
-
+			
+			
 			p.add(taille);
-			p.add(Box.createVerticalStrut(50));
-			p.add(rat);
+			p.add(couleur);
 			p.add(sup);
-			p.add(titre);
+			p.add(tit);
 			p.add(tag);
+			p.add(not);
 
 			p.add(precedent);
 
 
 
 			this.add(p);
-
-
+	
+	
 
 		}
 	}
