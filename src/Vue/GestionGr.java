@@ -7,7 +7,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 
-import Controleur.GestionTriImg;
 import Modele.ImageModel;
 import Modele.MainModel;
 
@@ -38,7 +37,7 @@ public class GestionGr extends Frame implements WindowListener{
 		this.add(panneauG, BorderLayout.NORTH);
 
 		
-		Afficheurtri panneaug = new Afficheurtri();
+		Afficheurtri panneaug = new Afficheurtri(modl, mm);
 		this.add(panneaug , BorderLayout.WEST);
 		
 		Afficherliste panneaub = new Afficherliste();

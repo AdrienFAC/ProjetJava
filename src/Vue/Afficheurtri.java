@@ -1,144 +1,142 @@
 package Vue;
 
 import java.awt.Choice;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
 import java.awt.Panel;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import Controleur.GestionImg;
 import Modele.ImageModel;
 import Modele.MainModel;
 
 
-public class Afficheurtri extends Panel implements ActionListener, ItemListener, TextListener {
+public class Afficheurtri extends Panel implements ActionListener, ItemListener, TextListener   {
 
-	TextField rat ;
+	Choice couleur= new Choice();
 	Choice taille = new Choice();
-	Choice titre = new Choice();
+	Choice tit = new Choice();
 	Choice tag = new Choice();
 	Choice sup= new Choice();
-
-	String[] choixTaille = {"Grande","Moyenne", "Petite", "Supérieure à ","Inférieure à "};
-	List<String> choixTitre;
-	List<String> choixTag;
+	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
-
-	ImageModel modl;
-	GestionImg mm;
+	HashSet<Note>  k =  new HashSet<Note>();
 
 
-	public Afficheurtri () throws IOException{
 
-		this.modl = new ImageModel();
-		this.mm = new GestionImg();
+	public Afficheurtri(ImageModel m , MainModel g){
 
 		Panel p = new Panel();
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
-		p.setPreferredSize(new Dimension(300,800));
+		p.setPreferredSize(new Dimension(300,600));
 
 		JButton precedent = new JButton();
 		precedent.setBounds(250,550 , 150, 50);
 		precedent.setText("precedent");
 
-		rat = new TextField();
+		for (ImageModel img : g.lst_images){
+			int note = img.note;
+			k.add(new Note(note));
+		}
+		Iterator<Note> t = this.k.iterator();
+		while (t.hasNext()) {
+			not.add(t.next().toString());
+		}
+
+		for (ImageModel img : g.lst_images){
+			String titre = img.titre;
+			String tt=titre.substring(45,titre.length());
+			tit.add(tt);
+		}
+
+		for (ImageModel img : g.lst_images){
+			java.util.List<String> ta = img.lst_tags;
+			tag.add(ta.toString());
+		}
 
 
-
-		/*for(int j=0;j<m.titre.length();j++){
-				if (m.getTitre().contains((CharSequence) titre)){
-					titre.add(m.getTitre());
-				}
-			}
-
-			for(int k=0;k<m.lst_tags.size();k++){
-				if (m.lst_tags.contains(tag)){
-					tag.add(m.lst_tags.get(k));
-				}
-			}*/
-
-		if (mm.choixImg==null){
+		if (g.lst_images==null){
 			System.out.println("pas d'images");
 		}
 		else{
-			for (ImageModel img : mm.choixImg){
+			for (ImageModel img : g.lst_images){
 				int largeur=img.image.getWidth();
 				int longueur=img.image.getHeight();
 				h.add(new Taille(largeur,longueur));
 			}
+
 
 			Iterator<Taille> it = this.h.iterator();
 			while (it.hasNext()) {
 				sup.add(it.next().toString());
 			}
 
-			taille.add(choixTaille[0]);
-			taille.add(choixTaille[1]);
-			taille.add(choixTaille[2]);
-			taille.add(choixTaille[3] + sup);
-			taille.add(choixTaille[4] + sup);
+			taille.add("Grande");
+			taille.add("Moyennes");
+			taille.add("petit");
+			taille.add("supérieur à");
+			taille.add("égale à ");
+
 
 
 			p.add(taille);
-			p.add(Box.createVerticalStrut(50));
-			p.add(rat);
+			p.add(couleur);
 			p.add(sup);
-			p.add(titre);
+			p.add(tit);
 			p.add(tag);
+			p.add(not);
 
 			p.add(precedent);
-
-			for( ImageModel img : mm.choixImg) {
-				titre.add(img.getTitre());
-				List<String> choixTag = img.getTags();
-			}
 
 			this.add(p);
 
 			precedent.addActionListener(this);
 			taille.addItemListener(this);
-			rat.addTextListener(this);
 			sup.addItemListener(this);
-			titre.addItemListener(this);
+			tit.addItemListener(this);
 			tag.addItemListener(this);
+
+
+			this.add(p);
+
+
 
 		}
 	}
 
 
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void textValueChanged(TextEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
+
 	@Override
-	public void textValueChanged(TextEvent e) {
+	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
 }
