@@ -90,7 +90,7 @@ public class ImageModel
 		}
 		return result;
 	}
-	
+
 	public ImageModel(String path, String name) throws IOException
 	{
 		File f;

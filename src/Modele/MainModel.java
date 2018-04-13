@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 public class MainModel
 {
 	public List<ImageModel> lst_images;
@@ -22,7 +24,7 @@ public class MainModel
 		{
 			System.out.println("[" + img.titre + "]");
 			System.out.println("Note: " + img.note);
-			System.out.println();			
+			System.out.println();	
 		}
 	}
 
@@ -42,7 +44,6 @@ public class MainModel
 			}
 			i++;
 		}
-		
 		if (finish == 1)
 			SortByMark(lst);
 	}
@@ -71,26 +72,21 @@ public class MainModel
 	
 	public MainModel() throws IOException
 	{
-		this.lst_images = loadImages("images/");
+		this.lst_images = loadImages("./images/");
 	}
 
-	public int IsPresentInList(List<ImageModel> lst, String title)
+	public static int IsPresentInList(List<ImageModel> lst, String title)
 	{
 		int i = 0;
 		for (ImageModel img : lst)
 		{
-			if (img.titre == title)
+			if (img.titre.equals(title))
 				return (i);
 			i++;
 		}
 		return (-1);
 	}
-	
-	public String IsPresentInList(List<ImageModel> lst, int index) {
-		
-		return lst.get(index).getTitre();
-	}
-	
+
 	public void deserialize(String outFile)
 	{
 		List<ImageModel> tmp_lst = new ArrayList<ImageModel>();
