@@ -34,6 +34,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
 	HashSet<Note>  k =  new HashSet<Note>();
+	String [] col ={"bleu","rouge","vert","jaune","violet","rose","marron","orange","magenta","cyan"};
 	GestionImg mm = null;
 	GestionTriImg im = null;
 	MainModel mold = null;
@@ -57,6 +58,8 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		precedent.setBounds(250,550 , 150, 50);
 		precedent.setText("precedent");
 
+		g.lst_images.get(1).addImageTag("#bretagne");
+		g.lst_images.get(1).addImageTag("#mer");
 		for (ImageModel img : g.lst_images){
 			int note = img.note;
 			k.add(new Note(note));
@@ -72,8 +75,9 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		}
 
 		for (ImageModel img : g.lst_images){
-			java.util.List<String> ta = img.lst_tags;
-			tag.add(ta.toString());
+			for (String str : img.lst_tags){
+				tag.add(str.toString());
+			}
 		}
 
 
@@ -91,6 +95,9 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 			Iterator<Taille> it = this.h.iterator();
 			while (it.hasNext()) {
 				sup.add(it.next().toString());
+			}
+			for (int i =0;i<10;i++){
+				couleur.add(col[i]);
 			}
 
 			taille.add("Grande");
