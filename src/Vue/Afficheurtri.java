@@ -34,7 +34,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
 	HashSet<Note>  k =  new HashSet<Note>();
-	String [] col ={"rouge","vert","jaune","violet","rose","marron","orange","magenta","cyan"};
+	String [] col ={"bleu","rouge","vert","jaune","violet","rose","marron","orange","magenta","cyan","noir"};
 	GestionImg mm = null;
 	GestionTriImg im = null;
 	MainModel mold = null;
