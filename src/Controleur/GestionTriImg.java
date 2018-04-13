@@ -3,25 +3,26 @@ package Controleur;
 import java.io.IOException;
 import java.util.List;
 
+import Modele.ImageModel;
+import Modele.MainModel;
+
 public class GestionTriImg {
 	
-	GestionImg lst;
 	public List<Modele.ImageModel> lst_triee;
 	
-	public GestionTriImg() throws IOException {
+	public GestionTriImg(MainModel lst) throws IOException {
 		
-		this.lst = new GestionImg();
-		this.lst_triee = lst.choixImg;
+		this.lst_triee = lst.lst_images;
 		
 	}
 	
-	public void choixTaille(String taille) {
+	public void choixTaille(MainModel m, GestionImg lst, String taille) {
 		
-		for(int i = 0; i < this.lst.choixImg.size() ; i++) {
+		for(int i = 0; i < lst.choixImg.size() ; i++) {
 		
-			if(this.lst.tailleImg(i).contains(taille) == false) {
+			if(lst.tailleImg(m, i).contains(taille) == false) {
 			
-				this.lst.choixImg.remove(i);
+				lst.choixImg.remove(i);
 			
 			}
 		
@@ -29,29 +30,26 @@ public class GestionTriImg {
 		
 	}
 	
-	public void choixTitre(String titre) {
+	public List<ImageModel> choixTitre(MainModel m, GestionImg lst, String titre) {
 		
-		for(int i = 0; i < this.lst.choixImg.size() ; i++) {
+		for(int i = 0; i < lst.choixImg.size() ; i++) {
 			
-			if(this.lst.nameImg(i).contains(titre) == false) {
+			lst.choixImg.clear();
 			
-				this.lst.choixImg.remove(i);
-			
-			}
 		
 		}
 		
-		//this.lst.changeImg(titre);
+		return lst.choixImg;
 	
 	}
 	
-	public void choixTag(String tag) {
+	public void choixTag(MainModel m, GestionImg lst, String tag) {
 		
-		for(int i = 0; i < this.lst.choixImg.size() ; i++) {
+		for(int i = 0; i < lst.choixImg.size() ; i++) {
 			
-			if(this.lst.tagImg(i).contains(tag) == false) {
+			if(lst.tagImg(m, i).contains(tag) == false) {
 				
-				this.lst.choixImg.remove(i);
+				lst.choixImg.remove(i);
 			
 			}
 		

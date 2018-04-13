@@ -15,14 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controleur.GestionTriImg;
+import Modele.MainModel;
 
 public class Afficherliste extends Panel {
 
-	GestionTriImg m;
+	JPanel lis = null;
 
-	public Afficherliste() throws IOException {
-
-		this.m = new GestionTriImg();
+	public Afficherliste(MainModel lst) throws IOException {
 
 		Panel p = new Panel();
 		p.setPreferredSize(new Dimension(900,100));
@@ -32,14 +31,30 @@ public class Afficherliste extends Panel {
 		suivant.setBounds(1400,0 , 80, 20);
 		suivant.setText("suivant");
 
-		JPanel lis = new JPanel();
+		lis = new JPanel();
 		lis.setLayout(new BoxLayout(lis, BoxLayout.LINE_AXIS));
+		
+		if(lst==null) {
+			System.out.println("merde");
+		} else {
+			affiche(lst);
+		}
+		
+
+		p.add(suivant);
+		p.add(lis,BorderLayout.CENTER);
+
+		this.add(p);
 
 
-		for(int i = 0; i < m.lst_triee.size() ; i++) {
+	}
+	
+	public void affiche(MainModel lst) {
+		
+		for(int i = 0; i < lst.lst_images.size() ; i++) {
 
 			JPanel pane = new JPanel();
-			ImageIcon image1 = new ImageIcon("images/" + m.lst_triee.get(i).getTitre() + ".jpg");
+			ImageIcon image1 = new ImageIcon("images/" + lst.lst_images.get(i).getTitre() + ".jpg");
 			ImageIcon newimage1 = new ImageIcon(image1.getImage().getScaledInstance(image1.getIconWidth()*1/8,image1.getIconHeight()*1/8,Image.SCALE_DEFAULT));
 			JLabel image = new JLabel( newimage1);
 			pane.add(image);
@@ -48,17 +63,6 @@ public class Afficherliste extends Panel {
 			lis.add(Box.createHorizontalStrut(5));
 
 		}
-
-		System.out.println(m.lst_triee.size()/2);
-		System.out.println(m.lst_triee.get(m.lst_triee.size()/2).getTitre());
-
-
-		p.add(suivant);
-		p.add(lis,BorderLayout.CENTER);
-
-		this.add(p);
-
-
 	}
 
 }

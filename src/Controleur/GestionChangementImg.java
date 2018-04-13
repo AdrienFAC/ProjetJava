@@ -5,51 +5,45 @@ import java.io.IOException;
 import Modele.ImageModel;
 import Modele.MainModel;
 import Vue.AfficheurImage;
+import Vue.GestionGr;
 
 public class GestionChangementImg  {
-	
-	GestionImg changementImg; 
-	AfficheurImage imgActu;
-	ImageModel img ;
-	MainModel lst;
+	 
 	int  suivant;
 	int precedent;
 	String titre;
 	GestionImg listImg;
 	
-	public GestionChangementImg() throws IOException {
-		
-		this.listImg = new GestionImg();
-		this.changementImg = listImg ; 
+	public GestionChangementImg(MainModel lst ) throws IOException {
 		
 	}
 	
-	public void changeImgPrecedent() {
+	public void changeImgPrecedent(GestionImg changementImg, MainModel lst, GestionGr img) {
 		System.out.println("coucou" );
 		
-		this.precedent = this.changementImg.indexOfImg() - 1;
+		this.precedent = changementImg.indexOfImg(lst, img) - 1;
 		
 		if (this.precedent < 0) {
-			this.precedent = this.changementImg.choixImg.size() - 1;
+			this.precedent = changementImg.choixImg.size() - 1;
 		} else {
 			this.precedent -= 1;
 		}
 		
-		this.listImg.changeImg(this.changementImg.nameImg(this.precedent));
+		this.listImg.changeImg(lst, img, changementImg.nameImg(lst, this.precedent));
 		
 	}
 	
-	public void changeSuivant() {
+	public void changeSuivant(GestionImg changementImg, MainModel lst, GestionGr img) {
 		
-		this.suivant = this.changementImg.indexOfImg() + 1;
+		this.suivant = changementImg.indexOfImg(lst, img) + 1;
 		
-		if (this.suivant == this.changementImg.choixImg.size() - 1) {
+		if (this.suivant == changementImg.choixImg.size() - 1) {
 			this.suivant = 0;
 		} else {
 			this.suivant += 1;
 		}
 		
-		this.listImg.changeImg(this.changementImg.nameImg(this.suivant));
+		this.listImg.changeImg(lst, img, changementImg.nameImg(lst, this.suivant));
 		
 	}
 	

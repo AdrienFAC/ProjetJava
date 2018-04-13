@@ -11,12 +11,15 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import Controleur.GestionImg;
+import Controleur.GestionTriImg;
 import Modele.ImageModel;
 import Modele.MainModel;
 
@@ -31,10 +34,18 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
 	HashSet<Note>  k =  new HashSet<Note>();
+	GestionImg mm = null;
+	GestionTriImg im = null;
+	MainModel mold = null;
 
 
 
-	public Afficheurtri(ImageModel m , MainModel g){
+	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri){
+		
+		this.mold = g;
+		this.im = tri;
+		this.mm = ges;
+		
 
 		Panel p = new Panel();
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
@@ -57,8 +68,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 
 		for (ImageModel img : g.lst_images){
 			String titre = img.titre;
-			String tt=titre.substring(45,titre.length());
-			tit.add(tt);
+			tit.add(titre);
 		}
 
 		for (ImageModel img : g.lst_images){
@@ -109,33 +119,52 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 			tag.addItemListener(this);
 
 
-			this.add(p);
-
-
 
 		}
 	}
-
+	
 
 
 	@Override
-	public void textValueChanged(TextEvent arg0) {
+	public void textValueChanged(TextEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 
-
 	@Override
-	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
+	public void itemStateChanged(ItemEvent item) {
+
+		if(tit.getSelectedItem() != null) {
+			this.mold.lst_images =  im.choixTitre(mold, mm, tit.getSelectedItem());
+			//pannel.removeAll();
+			System.out.println(this.mold.lst_images.size());
+		}
+		
+		
+		/*
+		if(choix.equals("titre")) {
+			System.out.println("titre");
+			//choixTitre(m, mm, selection);
+		}
+		if(choix.equals("taille")) {
+			System.out.println("taille");
+		}
+		if(choix.equals("sup")) {
+			System.out.println("sup");
+		}
+		if(choix.equals("tag")) {
+			System.out.println("tag");
+		}
+
+		System.out.println(mm.choixImg.size());
+
+		 */
 
 	}
 
-
-
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
 	}

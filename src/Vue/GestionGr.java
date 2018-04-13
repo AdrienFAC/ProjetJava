@@ -7,6 +7,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 
+import Controleur.GestionImg;
+import Controleur.GestionTriImg;
 import Modele.ImageModel;
 import Modele.MainModel;
 
@@ -18,12 +20,16 @@ public class GestionGr extends Frame implements WindowListener{
 	
 	ImageModel modl; 
 	MainModel mm ;
+	GestionTriImg tri;
+	GestionImg ges;
 	public String img;
 	
 	public GestionGr() throws IOException{
 		
 		this.mm = new MainModel();
 		this.modl = new ImageModel();
+		ges = new GestionImg(mm);
+		tri = new GestionTriImg(mm);
 		
 		this.img = "images/"+ mm.lst_images.get(this.mm.lst_images.size()/2).getTitre() +".jpg";
 		
@@ -37,10 +43,10 @@ public class GestionGr extends Frame implements WindowListener{
 		this.add(panneauG, BorderLayout.NORTH);
 
 		
-		Afficheurtri panneaug = new Afficheurtri(modl, mm);
+		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri);
 		this.add(panneaug , BorderLayout.WEST);
 		
-		Afficherliste panneaub = new Afficherliste();
+		Afficherliste panneaub = new Afficherliste(mm);
 		this.add(panneaub, BorderLayout.SOUTH);
 		
 		
