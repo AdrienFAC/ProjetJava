@@ -18,7 +18,7 @@ public class GestionChangementImg  {
 		
 	}
 	
-	public void changeImgPrecedent(GestionImg changementImg, MainModel lst, GestionGr img) {
+	public void changeImgPrecedent(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 		System.out.println("coucou" );
 		
 		this.precedent = changementImg.indexOfImg(lst, img) - 1;
@@ -33,7 +33,7 @@ public class GestionChangementImg  {
 		
 	}
 	
-	public void changeSuivant(GestionImg changementImg, MainModel lst, GestionGr img) {
+	public void changeSuivant(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 		
 		this.suivant = changementImg.indexOfImg(lst, img) + 1;
 		

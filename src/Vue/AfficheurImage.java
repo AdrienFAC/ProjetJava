@@ -15,12 +15,11 @@ import Modele.ImageModel;
 public class AfficheurImage extends Panel {
 
 	Image im = null;
-
-	GestionImg img;
+	public String im_default = "images/espace.jpg";
 
 	ImageModel modl;
 
-	public AfficheurImage(ImageModel m, String im_default){
+	public AfficheurImage(ImageModel m){
 		super();
 		this.setPreferredSize(new Dimension(200,200));
 		try {
@@ -31,6 +30,7 @@ public class AfficheurImage extends Panel {
 		}
 
 	}
+	
 
 
 

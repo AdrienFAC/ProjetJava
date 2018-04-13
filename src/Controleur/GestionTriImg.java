@@ -30,16 +30,18 @@ public class GestionTriImg {
 		
 	}
 	
-	public List<ImageModel> choixTitre(MainModel m, GestionImg lst, String titre) {
+	public void choixTitre(MainModel m, GestionImg lst, String t) {
 		
 		for(int i = 0; i < lst.choixImg.size() ; i++) {
 			
-			lst.choixImg.clear();
 			
+			if(lst.choixImg.get(i).getTitre().equals(t) == false) {
+				
+				lst.choixImg.remove(i);
+			
+			}	
 		
-		}
-		
-		return lst.choixImg;
+		}	
 	
 	}
 	

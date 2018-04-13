@@ -11,10 +11,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
@@ -38,16 +40,19 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	GestionImg mm = null;
 	GestionTriImg im = null;
 	MainModel mold = null;
-	Afficherliste list;
+	Afficherliste list = null;
+	AfficheurImage imDef = null;
+	ImageModel imm = null;
 
 
-
-	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l){
+	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l, AfficheurImage def){
 		
 		this.mold = g;
 		this.im = tri;
 		this.mm = ges;
 		this.list = l;
+		this.imDef = def;
+		this.imm = m; 
 		
 
 		Panel p = new Panel();
@@ -143,31 +148,28 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 
 	@Override
 	public void itemStateChanged(ItemEvent item) {
-
-		if(tit.getSelectedItem() != null) {
-			this.mold.lst_images =  im.choixTitre(mold, mm, tit.getSelectedItem());
+		
+		String select = (String) item.getItem();
+		if(tit.getSelectedItem().equals(select)) {
+			im.choixTitre(mold, mm, tit.getSelectedItem());
+			String name = "images/"+tit.getSelectedItem()+".jpg";
 			this.list.removeAll();
+			this.list.affiche(this.im.lst_triee);
+			imDef.im_default = name;
+			imDef = new AfficheurImage(imm);
 		}
-		
-		
-		/*
-		if(choix.equals("titre")) {
-			System.out.println("titre");
-			//choixTitre(m, mm, selection);
+		if(couleur.getSelectedItem().equals(select)) {
+			System.out.println("couleur");
 		}
-		if(choix.equals("taille")) {
+		if(taille.getSelectedItem().equals(select)) {
 			System.out.println("taille");
 		}
-		if(choix.equals("sup")) {
-			System.out.println("sup");
-		}
-		if(choix.equals("tag")) {
+		if(tag.getSelectedItem().equals(select)) {
 			System.out.println("tag");
 		}
-
-		System.out.println(mm.choixImg.size());
-
-		 */
+		if(not.getSelectedItem().equals(select)) {
+			System.out.println("note");
+		}
 
 	}
 

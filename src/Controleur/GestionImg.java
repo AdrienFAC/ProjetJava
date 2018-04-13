@@ -21,10 +21,10 @@ public class GestionImg {
 	}
 
 
-	public int indexOfImg(MainModel lst , GestionGr imgActu) {
+	public int indexOfImg(MainModel lst , AfficheurImage imgActu) {
 
-		this.titre = imgActu.img.replaceAll("imges/", "");
-		this.titre = imgActu.img.replaceAll(".jpg", "");
+		this.titre = imgActu.im_default.replaceAll("imges/", "");
+		this.titre = imgActu.im_default.replaceAll(".jpg", "");
 		return lst.IsPresentInList(this.choixImg, this.titre);
 
 	}
@@ -59,10 +59,10 @@ public class GestionImg {
 
 	}
 
-	public void changeImg(MainModel lst, GestionGr imgActu,  String t) {
+	public void changeImg(MainModel lst, AfficheurImage imgActu,  String t) {
 
 		this.titre = "images/" + t + ".jpg";
-		imgActu.img = this.titre ;
+		imgActu.im_default = this.titre ;
 
 	}
 

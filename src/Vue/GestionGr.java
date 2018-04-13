@@ -22,7 +22,7 @@ public class GestionGr extends Frame implements WindowListener{
 	MainModel mm ;
 	GestionTriImg tri;
 	GestionImg ges;
-	public String img;
+	AfficheurImage defaut;
 	
 	public GestionGr() throws IOException{
 		
@@ -30,13 +30,12 @@ public class GestionGr extends Frame implements WindowListener{
 		this.modl = new ImageModel();
 		ges = new GestionImg(mm);
 		tri = new GestionTriImg(mm);
-		
-		this.img = "images/"+ mm.lst_images.get(2).getTitre() +".jpg";
+		defaut = new AfficheurImage(this.modl);
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1500,1000));
 		
-		AfficheurImage panneauH = new AfficheurImage(modl, img);
+		AfficheurImage panneauH = new AfficheurImage(modl);
 		this.add(panneauH, BorderLayout.CENTER);
 		
 		AfficheurRating panneauG = new AfficheurRating(modl);
@@ -46,7 +45,7 @@ public class GestionGr extends Frame implements WindowListener{
 		Afficherliste panneaub = new Afficherliste(mm);
 		this.add(panneaub, BorderLayout.SOUTH);
 		
-		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub );
+		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub, panneauH );
 		this.add(panneaug , BorderLayout.WEST);
 		
 		
