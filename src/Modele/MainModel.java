@@ -86,6 +86,11 @@ public class MainModel
 		}
 		return (-1);
 	}
+	
+	public static String IsPresentInList(List<ImageModel> lst, int index)
+	{
+		return lst.get(index).getTitre();
+	}
 
 	public void deserialize(String outFile)
 	{

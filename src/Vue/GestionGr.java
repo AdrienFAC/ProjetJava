@@ -31,7 +31,7 @@ public class GestionGr extends Frame implements WindowListener{
 		ges = new GestionImg(mm);
 		tri = new GestionTriImg(mm);
 		
-		this.img = "images/"+ mm.lst_images.get(this.mm.lst_images.size()/2).getTitre() +".jpg";
+		this.img = "images/"+ mm.lst_images.get(2).getTitre() +".jpg";
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1500,1000));
@@ -43,11 +43,11 @@ public class GestionGr extends Frame implements WindowListener{
 		this.add(panneauG, BorderLayout.NORTH);
 
 		
-		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri);
-		this.add(panneaug , BorderLayout.WEST);
-		
 		Afficherliste panneaub = new Afficherliste(mm);
 		this.add(panneaub, BorderLayout.SOUTH);
+		
+		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub );
+		this.add(panneaug , BorderLayout.WEST);
 		
 		
 		this.addWindowListener(this);

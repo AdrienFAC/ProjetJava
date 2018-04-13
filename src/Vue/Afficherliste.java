@@ -33,13 +33,13 @@ public class Afficherliste extends Panel {
 
 		lis = new JPanel();
 		lis.setLayout(new BoxLayout(lis, BoxLayout.LINE_AXIS));
-		
+
 		if(lst==null) {
 			System.out.println("merde");
 		} else {
 			affiche(lst);
 		}
-		
+
 
 		p.add(suivant);
 		p.add(lis,BorderLayout.CENTER);
@@ -48,20 +48,38 @@ public class Afficherliste extends Panel {
 
 
 	}
-	
-	public void affiche(MainModel lst) {
-		
-		for(int i = 0; i < lst.lst_images.size() ; i++) {
 
+	public void affiche(MainModel lst) {
+
+		if(lst.lst_images.size() > 1) {
+
+			for(int i = 0; i < lst.lst_images.size() ; i++) {
+
+				if(i < 5) {
+					
+					JPanel pane = new JPanel();
+					ImageIcon image1 = new ImageIcon("images/" + lst.lst_images.get(i).getTitre() + ".jpg");
+					ImageIcon newimage1 = new ImageIcon(image1.getImage().getScaledInstance(image1.getIconWidth()*1/8,image1.getIconHeight()*1/8,Image.SCALE_DEFAULT));
+					JLabel image = new JLabel( newimage1);
+					pane.add(image);
+
+					lis.add(pane);
+					lis.add(Box.createHorizontalStrut(5));
+
+				}
+			}
+			
+		} else {
+			
 			JPanel pane = new JPanel();
-			ImageIcon image1 = new ImageIcon("images/" + lst.lst_images.get(i).getTitre() + ".jpg");
+			ImageIcon image1 = new ImageIcon("images/" + lst.lst_images.get(0).getTitre() + ".jpg");
 			ImageIcon newimage1 = new ImageIcon(image1.getImage().getScaledInstance(image1.getIconWidth()*1/8,image1.getIconHeight()*1/8,Image.SCALE_DEFAULT));
 			JLabel image = new JLabel( newimage1);
 			pane.add(image);
 
 			lis.add(pane);
 			lis.add(Box.createHorizontalStrut(5));
-
+			
 		}
 	}
 

@@ -38,14 +38,16 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	GestionImg mm = null;
 	GestionTriImg im = null;
 	MainModel mold = null;
+	Afficherliste list;
 
 
 
-	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri){
+	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l){
 		
 		this.mold = g;
 		this.im = tri;
 		this.mm = ges;
+		this.list = l;
 		
 
 		Panel p = new Panel();
@@ -144,8 +146,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 
 		if(tit.getSelectedItem() != null) {
 			this.mold.lst_images =  im.choixTitre(mold, mm, tit.getSelectedItem());
-			//pannel.removeAll();
-			System.out.println(this.mold.lst_images.size());
+			this.list.removeAll();
 		}
 		
 		
