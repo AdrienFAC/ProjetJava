@@ -23,6 +23,8 @@ public class GestionGr extends Frame implements WindowListener{
 	GestionTriImg tri;
 	GestionImg ges;
 	AfficheurImage defaut;
+	Taille t;
+	AfficheurImage a;
 	
 	public GestionGr() throws IOException{
 		
@@ -47,6 +49,9 @@ public class GestionGr extends Frame implements WindowListener{
 		
 		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub, panneauH );
 		this.add(panneaug , BorderLayout.WEST);
+		
+		AfficheurInfo panneaud = new AfficheurInfo(modl,mm,t,a);
+		this.add(panneaud, BorderLayout.EAST);
 		
 		
 		this.addWindowListener(this);

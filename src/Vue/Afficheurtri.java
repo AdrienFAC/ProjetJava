@@ -59,7 +59,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
-		p.setPreferredSize(new Dimension(300,600));
+		p.setPreferredSize(new Dimension(300,550));
 
 		JButton precedent = new JButton();
 		precedent.setBounds(250,550 , 150, 50);

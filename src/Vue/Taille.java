@@ -9,10 +9,11 @@ public class Taille {
 	public Taille (int t, int g){
 		this.largeur =t;
 		this.longueur=g;
-		
-		
-		
+
 	}
+	
+	
+
 	
 	public String toString() {
 		return String.valueOf(largeur) + " x " + String.valueOf(longueur);
