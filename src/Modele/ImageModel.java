@@ -63,7 +63,7 @@ public class ImageModel
 		return (0);
 	}
 	
-	public int FindColor(Color c)
+	public boolean FindColor(Color c)
 	{
 		int y = 0;
 		int x = 0;
@@ -88,7 +88,7 @@ public class ImageModel
 			}
 			x++;
 		}
-		return result;
+		return result >= (image.getWidth() * image.getHeight()) * 0.05;
 	}
 
 	public ImageModel(String path, String name) throws IOException
