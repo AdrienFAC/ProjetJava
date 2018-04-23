@@ -75,7 +75,7 @@ public class MainModel
 		this.lst_images = loadImages("./images/");
 	}
 
-	public static int IsPresentInList(List<ImageModel> lst, String title)
+	public int IsPresentInList(List<ImageModel> lst, String title)
 	{
 		int i = 0;
 		for (ImageModel img : lst)

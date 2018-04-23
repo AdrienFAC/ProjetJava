@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import Controleur.GestionChangementImg;
 import Controleur.GestionImg;
 import Controleur.GestionTriImg;
 import Modele.ImageModel;
@@ -43,9 +44,10 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	Afficherliste list = null;
 	AfficheurImage imDef = null;
 	ImageModel imm = null;
+	GestionChangementImg chanIm = null;
 
 
-	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l, AfficheurImage def){
+	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l, AfficheurImage def, GestionChangementImg imChange){
 		
 		this.mold = g;
 		this.im = tri;
@@ -53,6 +55,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		this.list = l;
 		this.imDef = def;
 		this.imm = m; 
+		this.chanIm = imChange;
 		
 
 		Panel p = new Panel();
@@ -150,23 +153,27 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	public void itemStateChanged(ItemEvent item) {
 		
 		String select = (String) item.getItem();
+		
 		if(tit.getSelectedItem().equals(select)) {
 			im.choixTitre(mold, mm, tit.getSelectedItem());
 			String name = "images/"+tit.getSelectedItem()+".jpg";
-			this.list.removeAll();
-			this.list.affiche(this.im.lst_triee);
 			imDef.im_default = name;
-			imDef = new AfficheurImage(imm);
+			this.list.affiche(this.im.lst_triee, this.mold.IsPresentInList(this.im.lst_triee, name));
+			imDef.changeImgDefault(name);
 		}
+		
 		if(couleur.getSelectedItem().equals(select)) {
 			System.out.println("couleur");
 		}
+		
 		if(taille.getSelectedItem().equals(select)) {
 			System.out.println("taille");
 		}
+		
 		if(tag.getSelectedItem().equals(select)) {
 			System.out.println("tag");
 		}
+		
 		if(not.getSelectedItem().equals(select)) {
 			System.out.println("note");
 		}
@@ -174,8 +181,13 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent evt) {
+		
+		if(evt.getActionCommand() == "precedent") {
+			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
+			this.imDef.changeImgDefault(name);
+		}
+		
 
 	}
 }

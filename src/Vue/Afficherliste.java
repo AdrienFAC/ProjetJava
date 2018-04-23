@@ -37,7 +37,7 @@ public class Afficherliste extends Panel {
 		if(lst==null) {
 			System.out.println("merde");
 		} else {
-			affiche(lst.lst_images);
+			affiche(lst.lst_images, 3);
 		}
 
 
@@ -48,18 +48,16 @@ public class Afficherliste extends Panel {
 
 	}
 
-	public void affiche(List<ImageModel> lst) {
-
+	public void affiche(List<ImageModel> lst, int depart) {
+		
+		this.removeAll();
+		
 		if(lst.size() >= 1) {
-			int[] num = {0, 5}; 
+			
 			for(int i = 0; i < lst.size() ; i++) {
 				
-				while(lst.get(i) == null) {
-					num[0]++;
-					num[1]++;
-				}
 				
-				if(num[0] <= i && i < num[1]) {
+				if(depart - 3 <= i && i < depart + 2) {
 
 					JPanel pane = new JPanel();
 					ImageIcon image1 = new ImageIcon("images/" + lst.get(i).getTitre() + ".jpg" );
@@ -71,9 +69,21 @@ public class Afficherliste extends Panel {
 					lis.add(Box.createHorizontalStrut(5));
 
 				}
-			}
+			}	
+		} else {
+			
+			JPanel pane = new JPanel();
+			ImageIcon image1 = new ImageIcon("images/" + lst.get(depart).getTitre() + ".jpg" );
+			ImageIcon newimage1 = new ImageIcon(image1.getImage().getScaledInstance(image1.getIconWidth()*1/8,image1.getIconHeight()*1/8,Image.SCALE_DEFAULT));
+			JLabel image = new JLabel( newimage1);
+			pane.add(image);
+			
+			lis.add(pane);
+			lis.add(Box.createHorizontalStrut(5));
 
-		} 
+		}
+		
+		this.repaint();
 	}
 
 }

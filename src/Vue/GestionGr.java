@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 
+import Controleur.GestionChangementImg;
 import Controleur.GestionImg;
 import Controleur.GestionTriImg;
 import Modele.ImageModel;
@@ -25,19 +26,20 @@ public class GestionGr extends Frame implements WindowListener{
 	AfficheurImage defaut;
 	Taille t;
 	AfficheurImage a;
+	GestionChangementImg changeImg;
 	
 	public GestionGr() throws IOException{
 		
 		this.mm = new MainModel();
 		this.modl = new ImageModel();
-		ges = new GestionImg(mm);
-		tri = new GestionTriImg(mm);
-		defaut = new AfficheurImage(this.modl);
+		this.ges = new GestionImg(mm);
+		this.tri = new GestionTriImg(mm);
+		this.changeImg = new GestionChangementImg(mm);
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1500,1000));
 		
-		AfficheurImage panneauH = new AfficheurImage(modl);
+		AfficheurImage panneauH = new AfficheurImage(modl, mm);
 		this.add(panneauH, BorderLayout.CENTER);
 		
 		AfficheurRating panneauG = new AfficheurRating(modl);
@@ -47,10 +49,10 @@ public class GestionGr extends Frame implements WindowListener{
 		Afficherliste panneaub = new Afficherliste(mm);
 		this.add(panneaub, BorderLayout.SOUTH);
 		
-		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub, panneauH );
+		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub, panneauH, changeImg);
 		this.add(panneaug , BorderLayout.WEST);
 		
-		AfficheurInfo panneaud = new AfficheurInfo(modl,mm,t,a);
+		AfficheurInfo panneaud = new AfficheurInfo(modl,mm,t,a, ges, changeImg);
 		this.add(panneaud, BorderLayout.EAST);
 		
 		

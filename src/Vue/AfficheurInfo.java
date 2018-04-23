@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Panel;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,15 +16,26 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controleur.GestionChangementImg;
+import Controleur.GestionImg;
+import Controleur.GestionTriImg;
 import Modele.ImageModel;
 import Modele.MainModel;
 
-public class AfficheurInfo extends Panel {
-	
-	
+public class AfficheurInfo extends Panel implements ActionListener {
+
+	GestionImg mm = null;
+	MainModel mold = null;
+	AfficheurImage imDef = null;
+	GestionChangementImg chanIm = null;
 
 
-	public AfficheurInfo(ImageModel m,MainModel g,Taille t,AfficheurImage a) throws IOException {
+	public AfficheurInfo(ImageModel m,MainModel g,Taille t,AfficheurImage a, GestionImg ges, GestionChangementImg imChange) throws IOException {
+
+		this.mm = ges;
+		this.mold = g;
+		this.imDef = a;
+		this.chanIm = imChange;
 
 		Panel p = new Panel();
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
@@ -30,41 +43,52 @@ public class AfficheurInfo extends Panel {
 		layout.preferredLayoutSize(p);
 		p.setPreferredSize(new Dimension(300,550));
 		ImageModel img = g.lst_images.get(1);
-		
 
-			TextField Taille = new TextField("");
-			Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
-			TextField Couleur = new TextField("");
-			Couleur.setText("couleur");
-			TextField sup = new TextField("");
-			sup.setText(new Sup(new Taille(img.getHeight(),img.getWidth())).toString());
-			TextField tit = new TextField();
-			tit.setText(img.getTitre().toString());
-			TextField tag = new TextField();
-			tag.setText(img.lst_tags.toString());
-			TextField not = new TextField();
-			not.setText(new Note(img.getNote()).toString());
-			JButton suivant = new JButton();
-			suivant.setBounds(1400,0 , 80, 20);
-			suivant.setText("suivant");
-			p.add(Taille);
-			p.add(Box.createVerticalStrut(5));
-			p.add(Couleur);
-			p.add(Box.createVerticalStrut(5));
-			p.add(sup);
-			p.add(Box.createVerticalStrut(5));
-			p.add(tit);
-			p.add(Box.createVerticalStrut(5));
-			p.add(tag);
-			p.add(Box.createVerticalStrut(5));
-			p.add(not);
-			p.add(Box.createVerticalStrut(5));
-			
-			p.add(suivant);
-			
-			
-		
+
+		TextField Taille = new TextField("");
+		Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
+		TextField Couleur = new TextField("");
+		Couleur.setText("couleur");
+		TextField sup = new TextField("");
+		sup.setText(new Sup(new Taille(img.getHeight(),img.getWidth())).toString());
+		TextField tit = new TextField();
+		tit.setText(img.getTitre().toString());
+		TextField tag = new TextField();
+		tag.setText(img.lst_tags.toString());
+		TextField not = new TextField();
+		not.setText(new Note(img.getNote()).toString());
+		JButton suivant = new JButton();
+		suivant.setBounds(1400,0 , 80, 20);
+		suivant.setText("suivant");
+		suivant.addActionListener(this);
+		p.add(Taille);
+		p.add(Box.createVerticalStrut(5));
+		p.add(Couleur);
+		p.add(Box.createVerticalStrut(5));
+		p.add(sup);
+		p.add(Box.createVerticalStrut(5));
+		p.add(tit);
+		p.add(Box.createVerticalStrut(5));
+		p.add(tag);
+		p.add(Box.createVerticalStrut(5));
+		p.add(not);
+		p.add(Box.createVerticalStrut(5));
+
+		p.add(suivant);
+
+
+
 		this.add(p);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+
+		if(evt.getActionCommand() == "suivant") {
+			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
+			this.imDef.changeImgDefault(name);
+		}
 
 	}
 

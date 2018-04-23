@@ -11,40 +11,33 @@ public class GestionChangementImg  {
 	 
 	int  suivant;
 	int precedent;
-	String titre;
 	GestionImg listImg;
 	
 	public GestionChangementImg(MainModel lst ) throws IOException {
-		
+		this.suivant = 4;
+		this.precedent = 2;
 	}
 	
-	public void changeImgPrecedent(GestionImg changementImg, MainModel lst, AfficheurImage img) {
-		System.out.println("coucou" );
+	public String nameImgPrecedent(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 		
-		this.precedent = changementImg.indexOfImg(lst, img) - 1;
-		
-		if (this.precedent < 0) {
+		if (this.precedent == 0) {
 			this.precedent = changementImg.choixImg.size() - 1;
 		} else {
 			this.precedent -= 1;
 		}
 		
-		this.listImg.changeImg(lst, img, changementImg.nameImg(lst, this.precedent));
+		return "images/" + changementImg.nameImg(lst, this.precedent) +".jpg";
 		
 	}
 	
-	public void changeSuivant(GestionImg changementImg, MainModel lst, AfficheurImage img) {
+	public String nameImgSuivant(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 		
-		this.suivant = changementImg.indexOfImg(lst, img) + 1;
-		
-		if (this.suivant == changementImg.choixImg.size() - 1) {
+		if (this.suivant == changementImg.choixImg.size()-1) {
 			this.suivant = 0;
 		} else {
 			this.suivant += 1;
 		}
-		
-		this.listImg.changeImg(lst, img, changementImg.nameImg(lst, this.suivant));
-		
+		return "images/" + changementImg.nameImg(lst, this.suivant) +".jpg";		
 	}
 	
 	
