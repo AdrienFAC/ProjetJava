@@ -1,6 +1,7 @@
 package Vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.WindowEvent;
@@ -13,6 +14,7 @@ import Controleur.GestionNote;
 import Controleur.GestionTriImg;
 import Modele.ImageModel;
 import Modele.MainModel;
+
 
 public class GestionGr extends Frame implements WindowListener{
 	
@@ -59,6 +61,7 @@ public class GestionGr extends Frame implements WindowListener{
 		this.add(panneaud, BorderLayout.EAST);
 		
 		
+	    this.setBackground(new Color(204,204,204));
 		this.addWindowListener(this);
 		this.pack();
 		this.setVisible(true);
