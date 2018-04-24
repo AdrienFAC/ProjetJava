@@ -45,8 +45,6 @@ public class GestionChangementImg  {
 		
 	 
 		this.incrementation(changementImg, true);
-		System.out.println(this.suivant);
-		System.out.println(this.precedent);
 		return "images/" + changementImg.nameImg(lst, this.precedent) +".jpg";
 		
 	}

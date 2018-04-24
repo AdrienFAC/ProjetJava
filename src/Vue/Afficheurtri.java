@@ -160,11 +160,13 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		String select = (String) item.getItem();
 		
 		if(tit.getSelectedItem().equals(select)) {
-			im.choixTitre(mold, mm, tit.getSelectedItem());
+			
 			String name = "images/"+tit.getSelectedItem()+".jpg";
 			imDef.im_default = name;
-			this.list.affiche(this.im.lst_triee, this.mold.IsPresentInList(this.im.lst_triee, name));
 			imDef.changeImgDefault(name);
+			im.choixTitre(mold, mm, tit.getSelectedItem());
+			this.list.affiche(this.im.lst_triee, this.mold.IsPresentInList(this.im.lst_triee, name));
+		
 		}
 		
 		if(couleur.getSelectedItem().equals(select)) {
