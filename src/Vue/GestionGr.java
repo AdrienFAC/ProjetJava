@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import Controleur.GestionChangementImg;
 import Controleur.GestionImg;
+import Controleur.GestionNote;
 import Controleur.GestionTriImg;
 import Modele.ImageModel;
 import Modele.MainModel;
@@ -27,6 +28,7 @@ public class GestionGr extends Frame implements WindowListener{
 	Taille t;
 	AfficheurImage a;
 	GestionChangementImg changeImg;
+	GestionNote not;
 	
 	public GestionGr() throws IOException{
 		
@@ -35,6 +37,7 @@ public class GestionGr extends Frame implements WindowListener{
 		this.ges = new GestionImg(mm);
 		this.tri = new GestionTriImg(mm);
 		this.changeImg = new GestionChangementImg(mm);
+		this.not = new GestionNote(mm, changeImg);
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1500,1000));
@@ -42,7 +45,7 @@ public class GestionGr extends Frame implements WindowListener{
 		AfficheurImage panneauH = new AfficheurImage(modl, mm);
 		this.add(panneauH, BorderLayout.CENTER);
 		
-		AfficheurRating panneauG = new AfficheurRating(modl);
+		AfficheurRating panneauG = new AfficheurRating(modl, not);
 		this.add(panneauG, BorderLayout.NORTH);
 
 		

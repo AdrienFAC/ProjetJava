@@ -11,32 +11,49 @@ public class GestionChangementImg  {
 	 
 	int  suivant;
 	int precedent;
+	public int indexImg;
 	GestionImg listImg;
 	
 	public GestionChangementImg(MainModel lst ) throws IOException {
 		this.suivant = 4;
 		this.precedent = 2;
+		this.indexImg = 3;
+	}
+	
+	public void incrementation(GestionImg changementImg, boolean prece) {
+		if(prece) {
+			if (this.precedent == 0) {
+				this.precedent = changementImg.choixImg.size() - 1;
+				this.suivant = 0 ;
+			} else {
+				this.precedent--;
+				this.suivant = this.precedent + 2;
+			}
+		} else {
+			if (this.suivant == changementImg.choixImg.size()-1) {
+				this.suivant = 0;
+				this.precedent = changementImg.choixImg.size()-1 ;
+			} else {
+				this.suivant--;
+				this.precedent = this.suivant - 2;
+			}
+		}
+		this.indexImg = this.precedent + 1 ; 
 	}
 	
 	public String nameImgPrecedent(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 		
-		if (this.precedent == 0) {
-			this.precedent = changementImg.choixImg.size() - 1;
-		} else {
-			this.precedent -= 1;
-		}
-		
+	 
+		this.incrementation(changementImg, true);
+		System.out.println(this.suivant);
+		System.out.println(this.precedent);
 		return "images/" + changementImg.nameImg(lst, this.precedent) +".jpg";
 		
 	}
 	
 	public String nameImgSuivant(GestionImg changementImg, MainModel lst, AfficheurImage img) {
-		
-		if (this.suivant == changementImg.choixImg.size()-1) {
-			this.suivant = 0;
-		} else {
-			this.suivant += 1;
-		}
+
+		this.incrementation(changementImg, false);
 		return "images/" + changementImg.nameImg(lst, this.suivant) +".jpg";		
 	}
 	

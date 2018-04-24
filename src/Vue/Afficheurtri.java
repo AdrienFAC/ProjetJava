@@ -186,8 +186,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		if(evt.getActionCommand() == "precedent") {
 			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);
+			this.list.affiche(this.mold.lst_images, this.chanIm.indexImg);
 		}
-		
-
 	}
 }

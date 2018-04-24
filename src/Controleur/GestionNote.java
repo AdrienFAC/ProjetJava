@@ -1,40 +1,30 @@
 package Controleur;
 
+import java.util.List;
+
+import Modele.ImageModel;
 import Modele.MainModel;
 import Vue.AfficheurImage;
 import Vue.GestionGr;
 
 public class GestionNote {
 	
-	MainModel modele;
-	int notation ; 
+	MainModel modele = null ;
+	GestionChangementImg im = null;
 	
-	public GestionNote(MainModel mold) {
+	public GestionNote(MainModel mold, GestionChangementImg imChange) {
 		
 		this.modele = mold;
+		this.im = imChange;
 	
 	}
 	
-	public void ChangeNote( int n, AfficheurImage img ) {
+	public void ChangeNote( int n ) {
 		
-		int index = 0;
+		int i = this.im.indexImg;
+		this.modele.lst_images.get(i).setNote(n);
 		
-		while(index < this.modele.lst_images.size()) {
-			
-			if(this.modele.lst_images.get(index).titre.contains(img.im_default)) {
-				
-				this.notation = n ;
-				
-			} else {
-				
-				this.notation = this.modele.lst_images.get(index).note ;
-				
-			}
-			
-		}
-		
-		this.modele.lst_images.get(index).note = this.notation ;
-		
+		System.out.println(this.modele.lst_images.get(i).getNote());
 	}
 	
 	

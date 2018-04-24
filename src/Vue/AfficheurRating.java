@@ -4,18 +4,30 @@ import java.awt.FlowLayout;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controleur.GestionNote;
 import Modele.ImageModel;
 
-public class AfficheurRating extends Panel {
-		TextField t1;
-	
+public class AfficheurRating extends Panel implements ActionListener, TextListener{
+		
+	TextField t1;
+	int note ;
+	GestionNote nota;
+	AfficheurImage defIm = null;
+	List<ImageModel> lst = null;
 
-
-	public AfficheurRating(ImageModel m){
+	public AfficheurRating(ImageModel m, GestionNote mm){
+		
+		this.nota = mm;
+		
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.LEFT));
 		p.setPreferredSize(new Dimension(1000,50));
@@ -39,9 +51,32 @@ public class AfficheurRating extends Panel {
 		p.add(t1);
 		
 		
-		
 		this.add(p);
+		t1.addTextListener(this);
+		enregistrement.addActionListener(this);
+		
 		}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		if(evt.getActionCommand() == "enregistrement") {
+			if(this.note <= 20 || this.note >= 0 ) {
+				this.nota.ChangeNote(this.note );
+			}
+		}
+	}
+
+
+
+	@Override
+	public void textValueChanged(TextEvent txt) {
+		
+		String source =  ((TextField)txt.getSource()).getText();
+		this.note =  Integer.parseInt(source);
+		
+	}
 
 		
 	}
