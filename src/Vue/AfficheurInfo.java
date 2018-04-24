@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +12,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controleur.GestionChangementImg;
@@ -28,8 +31,10 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	MainModel mold = null;
 	AfficheurImage imDef = null;
 	GestionChangementImg chanIm = null;
-
-
+	Color [] c = {Color.blue,Color.red,Color.green,Color.yellow,Color.pink,Color.orange,Color.magenta,Color.cyan};
+	String [] co ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
+	
+	
 	public AfficheurInfo(ImageModel m,MainModel g,Taille t,AfficheurImage a, GestionImg ges, GestionChangementImg imChange) throws IOException {
 
 		this.mm = ges;
@@ -42,13 +47,24 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
 		p.setPreferredSize(new Dimension(300,550));
-		ImageModel img = g.lst_images.get(1);
+		p.setBackground(new Color(153,153,153));
+		ImageModel img = g.lst_images.get(2);
 
-
+		JLabel info = new JLabel();
+		info.setText("INFORMATIONS");
+		info.setBorder(BorderFactory.createLineBorder(Color.white));
+		
 		TextField Taille = new TextField("");
 		Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
 		TextField Couleur = new TextField("");
-		Couleur.setText("couleur");
+		for(int i=0;i<c.length;i++) {
+		if( img.FindColor(c[i])) {
+			Couleur.setText(Couleur.getText() +" "+ co[i]);
+			
+		}
+		
+		}
+		
 		TextField sup = new TextField("");
 		sup.setText(new Sup(new Taille(img.getHeight(),img.getWidth())).toString());
 		TextField tit = new TextField();
@@ -61,6 +77,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		suivant.setBounds(1400,0 , 80, 20);
 		suivant.setText("suivant");
 		suivant.addActionListener(this);
+		p.add(info);
 		p.add(Taille);
 		p.add(Box.createVerticalStrut(5));
 		p.add(Couleur);

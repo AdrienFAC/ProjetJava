@@ -1,4 +1,5 @@
 package Vue;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
@@ -31,7 +32,9 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.LEFT));
 		p.setPreferredSize(new Dimension(1000,50));
+		p.setBackground(new Color(153,153,153));
 		JPanel p1 = new JPanel();
+		p1.setBackground(new Color(153,153,153));
 		p1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		p1.setPreferredSize(new Dimension(400,50));
 		t1 = new TextField(" ");

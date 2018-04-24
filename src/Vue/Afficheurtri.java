@@ -17,8 +17,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import Controleur.GestionChangementImg;
 import Controleur.GestionImg;
@@ -36,8 +38,8 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	Choice sup= new Choice();
 	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
-	HashSet<Note>  k =  new HashSet<Note>();
-	String [] col ={"bleu","rouge","vert","jaune","violet","rose","marron","orange","magenta","cyan","noir"};
+	HashSet<Note>  k =  new HashSet<Note>(); 
+	String [] col ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
 	GestionImg mm = null;
 	GestionTriImg im = null;
 	MainModel mold = null;
@@ -63,7 +65,12 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
 		p.setPreferredSize(new Dimension(300,550));
+		p.setBackground(new Color(153,153,153));
 
+		JLabel rech = new JLabel();
+		rech.setText("RECHERCHE");
+		rech.setBorder(BorderFactory.createLineBorder(Color.white));
+		
 		JButton precedent = new JButton();
 		precedent.setBounds(250,550 , 150, 50);
 		precedent.setText("precedent");
@@ -106,18 +113,16 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 			while (it.hasNext()) {
 				sup.add(it.next().toString());
 			}
-			for (int i =0;i<10;i++){
+			for (int i =0;i<8;i++){
 				couleur.add(col[i]);
 			}
 
 			taille.add("Grande");
 			taille.add("Moyennes");
 			taille.add("petit");
-			taille.add("supérieur à");
-			taille.add("égale à ");
 
 
-
+			p.add(rech);
 			p.add(taille);
 			p.add(couleur);
 			p.add(sup);

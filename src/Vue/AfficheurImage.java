@@ -1,4 +1,5 @@
 package Vue;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -23,7 +24,8 @@ public class AfficheurImage extends Panel {
 	public AfficheurImage(ImageModel m, MainModel mm){
 		super();
 		this.setPreferredSize(new Dimension(200,200));
-		this.im_default = "images/"+mm.lst_images.get(2).getTitre()+".jpg";
+		this.setBackground(Color.DARK_GRAY);
+		this.im_default = "images/"+mm.lst_images.get(2).getTitre() +".jpg";
 		try {
 			im = ImageIO.read(new File(im_default));
 		}catch (IOException e) {
@@ -49,7 +51,7 @@ public class AfficheurImage extends Panel {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(im,50, 50, this.getWidth(), this.getHeight(),this);
+		g.drawImage(im,10, 10, this.getWidth()-20, this.getHeight()-20,this);
 	}
 
 	public static void main(String[] args) {
