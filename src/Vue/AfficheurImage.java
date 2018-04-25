@@ -18,15 +18,18 @@ public class AfficheurImage extends Panel {
 
 	Image im = null;
 	public String im_default = null;
-
+	public ImageModel mold = null;
+	public MainModel main = null;
 
 	public AfficheurImage(ImageModel m, MainModel mm){
 		super();
+		this.mold = m;
+		this.main = mm;
 		this.setPreferredSize(new Dimension(200,200));
 		this.setBackground(Color.DARK_GRAY);
-		this.im_default = "images/"+mm.lst_images.get(2).getTitre() +".jpg";
+		this.im_default = "images/"+this.main.lst_images.get(2).getTitre() +".jpg";
 		try {
-			im = ImageIO.read(new File(im_default));
+			this.im = ImageIO.read(new File(im_default));
 		}catch (IOException e) {
 			throw new RuntimeException("L'image" + im_default + "n'est pas dans la banque de données");
 
@@ -40,7 +43,7 @@ public class AfficheurImage extends Panel {
 		
 		this.setPreferredSize(new Dimension(200,200));
 		try {
-			im = ImageIO.read(new File(name));
+			this.im = ImageIO.read(new File(name));
 		}catch (IOException e) {
 			throw new RuntimeException("L'image" + im_default + "n'est pas dans la banque de données");
 
@@ -50,7 +53,7 @@ public class AfficheurImage extends Panel {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(im,10, 10, this.getWidth()-20, this.getHeight()-20,this);
+		g.drawImage(this.im,10, 10, this.getWidth()-20, this.getHeight()-20,this);
 	}
 
 	public static void main(String[] args) {

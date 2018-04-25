@@ -34,21 +34,23 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	Color [] c = {Color.blue,Color.red,Color.green,Color.yellow,Color.pink,Color.orange,Color.magenta,Color.cyan};
 	String [] co ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
 	Panel p = null;
-	
-	public AfficheurInfo(ImageModel m,MainModel g,Taille t,AfficheurImage a, GestionImg ges, GestionChangementImg imChange) throws IOException {
+	Afficheurtri afftri =null;
+		
+	public AfficheurInfo(Afficheurtri tri) throws IOException {
 
-		this.mm = ges;
-		this.mold = g;
-		this.imDef = a;
-		this.chanIm = imChange;
-
+		this.mm = tri.mm;
+		this.mold = tri.mold;
+		this.imDef = tri.imDef;
+		this.chanIm = tri.chanIm;
+		this.afftri = tri;
+		
 		p = new Panel();
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
 		p.setPreferredSize(new Dimension(300,550));
 		p.setBackground(new Color(153,153,153));
-		ImageModel img = g.lst_images.get(imChange.indexImg);
+		ImageModel img = tri.mold.lst_images.get(tri.chanIm.indexImg);
 
 		JLabel info = new JLabel();
 		info.setText("INFORMATIONS");
@@ -104,9 +106,10 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		
 		if(evt.getActionCommand() == "suivant") {
 			String name = this.chanIm.nameImgSuivant(mm, mold, imDef);
-			System.out.println(name);
 			this.imDef.changeImgDefault(name);
+			
 		}
+		this.repaint();
 
 	}
 

@@ -27,16 +27,18 @@ public class Afficherliste extends Panel {
 	JPanel lis;
 	Panel p;
 	ImageIcon[] image1 = new ImageIcon[5];
+	public MainModel mold;
 
-	public Afficherliste(MainModel lst) throws IOException {
+	public Afficherliste(AfficheurImage img) throws IOException {
 
+		this.mold = img.main;
 		this.p = new Panel();
 		this.p.setPreferredSize(new Dimension(900,100));
 		this.p.setLayout(new BorderLayout());
 		this.lis = new JPanel();
 		this.lis.setLayout(new BoxLayout(lis, BoxLayout.LINE_AXIS));
 
-		affiche(lst.lst_images, 3);
+		affiche(this.mold.lst_images, 3);
 
 
 

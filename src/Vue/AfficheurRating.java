@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import Controleur.GestionNote;
 import Modele.ImageModel;
+import Modele.MainModel;
 
 public class AfficheurRating extends Panel implements ActionListener, TextListener{
 		
@@ -24,10 +25,14 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 	GestionNote nota;
 	AfficheurImage defIm = null;
 	List<ImageModel> lst = null;
+	ImageModel mold = null;
 
-	public AfficheurRating(ImageModel m, GestionNote mm){
+
+	public AfficheurRating(AfficheurImage img, GestionNote mm){
+		
 		
 		this.nota = mm;
+		this.mold =  img.mold; 
 		
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout(FlowLayout.LEFT));

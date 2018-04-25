@@ -47,17 +47,17 @@ public class GestionGr extends Frame implements WindowListener{
 		AfficheurImage panneauH = new AfficheurImage(modl, mm);
 		this.add(panneauH, BorderLayout.CENTER);
 		
-		AfficheurRating panneauG = new AfficheurRating(modl, not);
+		AfficheurRating panneauG = new AfficheurRating(panneauH, not);
 		this.add(panneauG, BorderLayout.NORTH);
 
 		
-		Afficherliste panneaub = new Afficherliste(mm);
+		Afficherliste panneaub = new Afficherliste(panneauH);
 		this.add(panneaub, BorderLayout.SOUTH);
 		
-		Afficheurtri panneaug = new Afficheurtri(modl, mm,  ges, tri, panneaub, panneauH, changeImg);
+		Afficheurtri panneaug = new Afficheurtri(panneauH, panneaub, ges, tri, changeImg);
 		this.add(panneaug , BorderLayout.WEST);
 		
-		AfficheurInfo panneaud = new AfficheurInfo(modl,mm,t,a, ges, changeImg);
+		AfficheurInfo panneaud = new AfficheurInfo(panneaug);
 		this.add(panneaud, BorderLayout.EAST);
 		
 		

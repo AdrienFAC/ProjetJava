@@ -40,23 +40,26 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 	HashSet<Taille>  h =  new HashSet<Taille>();
 	HashSet<Note>  k =  new HashSet<Note>(); 
 	String [] col ={"blue","red","green","yellow","pink","orange","magenta","cyan"};
-	GestionImg mm = null;
+	public GestionImg mm = null;
 	GestionTriImg im = null;
-	MainModel mold = null;
+	public MainModel mold = null;
 	Afficherliste list = null;
-	AfficheurImage imDef = null;
+	public AfficheurImage imDef = null;
 	ImageModel imm = null;
 	GestionChangementImg chanIm = null;
 
 
-	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l, AfficheurImage def, GestionChangementImg imChange){
+	public Afficheurtri(AfficheurImage def, Afficherliste l, GestionImg ges, GestionTriImg tri, GestionChangementImg imChange){
 
-		this.mold = g;
+		this.mold = def.main;
+		this.imm = def.mold; 
+		
+		this.list = l;
+		
 		this.im = tri;
 		this.mm = ges;
-		this.list = l;
 		this.imDef = def;
-		this.imm = m; 
+		this.imm = def.mold; 
 		this.chanIm = imChange;
 
 
@@ -75,9 +78,9 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 		precedent.setBounds(250,550 , 150, 50);
 		precedent.setText("precedent");
 
-		g.lst_images.get(1).addImageTag("#bretagne");
-		g.lst_images.get(1).addImageTag("#mer");
-		for (ImageModel img : g.lst_images){
+		this.mold.lst_images.get(1).addImageTag("#bretagne");
+		this.mold.lst_images.get(1).addImageTag("#mer");
+		for (ImageModel img : this.mold.lst_images){
 			int note = img.note;
 			k.add(new Note(note));
 		}
@@ -86,23 +89,23 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 			not.add(t.next().toString());
 		}
 
-		for (ImageModel img : g.lst_images){
+		for (ImageModel img : this.mold.lst_images){
 			String titre = img.titre;
 			tit.add(titre);
 		}
 
-		for (ImageModel img : g.lst_images){
+		for (ImageModel img : this.mold.lst_images){
 			for (String str : img.lst_tags){
 				tag.add(str.toString());
 			}
 		}
 
 
-		if (g.lst_images==null){
+		if (this.mold.lst_images==null){
 			System.out.println("pas d'images");
 		}
 		else{
-			for (ImageModel img : g.lst_images){
+			for (ImageModel img : this.mold.lst_images){
 				int largeur=img.image.getWidth();
 				int longueur=img.image.getHeight();
 				h.add(new Taille(largeur,longueur));
