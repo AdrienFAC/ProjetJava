@@ -19,7 +19,6 @@ public class AfficheurImage extends Panel {
 	Image im = null;
 	public String im_default = null;
 
-	ImageModel modl;
 
 	public AfficheurImage(ImageModel m, MainModel mm){
 		super();

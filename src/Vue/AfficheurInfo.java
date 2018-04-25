@@ -33,7 +33,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	GestionChangementImg chanIm = null;
 	Color [] c = {Color.blue,Color.red,Color.green,Color.yellow,Color.pink,Color.orange,Color.magenta,Color.cyan};
 	String [] co ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
-	
+	Panel p = null;
 	
 	public AfficheurInfo(ImageModel m,MainModel g,Taille t,AfficheurImage a, GestionImg ges, GestionChangementImg imChange) throws IOException {
 
@@ -42,13 +42,13 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		this.imDef = a;
 		this.chanIm = imChange;
 
-		Panel p = new Panel();
+		p = new Panel();
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
 		p.setLayout(layout);
 		layout.preferredLayoutSize(p);
 		p.setPreferredSize(new Dimension(300,550));
 		p.setBackground(new Color(153,153,153));
-		ImageModel img = g.lst_images.get(2);
+		ImageModel img = g.lst_images.get(imChange.indexImg);
 
 		JLabel info = new JLabel();
 		info.setText("INFORMATIONS");
@@ -101,12 +101,12 @@ public class AfficheurInfo extends Panel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-
+		
 		if(evt.getActionCommand() == "suivant") {
 			String name = this.chanIm.nameImgSuivant(mm, mold, imDef);
+			System.out.println(name);
 			this.imDef.changeImgDefault(name);
 		}
-		this.repaint();
 
 	}
 
