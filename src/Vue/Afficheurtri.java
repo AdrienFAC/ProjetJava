@@ -29,7 +29,7 @@ import Modele.ImageModel;
 import Modele.MainModel;
 
 
-public class Afficheurtri extends Panel implements ActionListener, ItemListener, TextListener   {
+public class Afficheurtri extends Panel implements ActionListener, ItemListener  {
 
 	Choice couleur= new Choice();
 	Choice taille = new Choice();
@@ -39,7 +39,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 	Choice not = new Choice();
 	HashSet<Taille>  h =  new HashSet<Taille>();
 	HashSet<Note>  k =  new HashSet<Note>(); 
-	String [] col ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
+	String [] col ={"blue","red","green","yellow","pink","orange","magenta","cyan"};
 	GestionImg mm = null;
 	GestionTriImg im = null;
 	MainModel mold = null;
@@ -50,7 +50,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 
 
 	public Afficheurtri(ImageModel m , MainModel g, GestionImg ges, GestionTriImg tri, Afficherliste l, AfficheurImage def, GestionChangementImg imChange){
-		
+
 		this.mold = g;
 		this.im = tri;
 		this.mm = ges;
@@ -58,7 +58,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		this.imDef = def;
 		this.imm = m; 
 		this.chanIm = imChange;
-		
+
 
 		Panel p = new Panel();
 		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
@@ -70,7 +70,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 		JLabel rech = new JLabel();
 		rech.setText("RECHERCHE");
 		rech.setBorder(BorderFactory.createLineBorder(Color.white));
-		
+
 		JButton precedent = new JButton();
 		precedent.setBounds(250,550 , 150, 50);
 		precedent.setText("precedent");
@@ -144,52 +144,73 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener,
 
 		}
 	}
-	
 
 
-	@Override
-	public void textValueChanged(TextEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 
 
 	@Override
 	public void itemStateChanged(ItemEvent item) {
-		
+
 		String select = (String) item.getItem();
-		
+
 		if(tit.getSelectedItem().equals(select)) {
-			
+
 			String name = "images/"+tit.getSelectedItem()+".jpg";
 			imDef.im_default = name;
 			imDef.changeImgDefault(name);
-			im.choixTitre(mold, mm, tit.getSelectedItem());
-			this.list.affiche(this.im.lst_triee, this.mold.IsPresentInList(this.im.lst_triee, name));
-		
+			this.list.affiche(im.choixTitre( tit.getSelectedItem()), this.chanIm.indexImg);
+			
 		}
-		
+
 		if(couleur.getSelectedItem().equals(select)) {
-			System.out.println("couleur");
+			/*String col = couleur.getSelectedItem();
+			List<ImageModel> lst = im.choixCouleur(Color.col);
+			if(lst.size() > 0) {
+				String name = "images/"+lst.get(0).getTitre()+".jpg";
+				imDef.changeImgDefault(name);
+				this.list.affiche(lst, this.chanIm.indexImg);
+			}*/
+			
 		}
-		
+
 		if(taille.getSelectedItem().equals(select)) {
-			System.out.println("taille");
+			
+			List<ImageModel> lst = im.choixTaille(taille.getSelectedItem());
+			if(lst.size() > 0) {
+				String name = "images/"+lst.get(0).getTitre()+".jpg";
+				imDef.changeImgDefault(name);
+				this.list.affiche(lst, this.chanIm.indexImg);
+			}
 		}
-		
+
 		if(tag.getSelectedItem().equals(select)) {
-			System.out.println("tag");
+			
+			List<ImageModel> lst = im.choixTag(tag.getSelectedItem());
+			if(lst.size() > 0) {
+				String name = "images/"+lst.get(0).getTitre()+".jpg";
+				imDef.changeImgDefault(name);
+				this.list.affiche(lst, this.chanIm.indexImg);
+			}
+			
 		}
-		
+
 		if(not.getSelectedItem().equals(select)) {
-			System.out.println("note");
+			
+			int note = this.mold.lst_images.get(this.chanIm.indexImg).getNote();
+			List<ImageModel> lst = im.choixNote(note);
+			if(lst.size() > 0) {
+				String name = "images/"+lst.get(0).getTitre()+".jpg";
+				imDef.changeImgDefault(name);
+				this.list.affiche(lst, this.chanIm.indexImg);
+			}
+
 		}
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		
+
 		if(evt.getActionCommand() == "precedent") {
 			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);

@@ -24,8 +24,9 @@ import Modele.MainModel;
 
 public class Afficherliste extends Panel {
 
-	JPanel lis = null;
-	Panel p = null;
+	JPanel lis;
+	Panel p;
+	ImageIcon[] image1 = new ImageIcon[5];
 
 	public Afficherliste(MainModel lst) throws IOException {
 
@@ -42,60 +43,52 @@ public class Afficherliste extends Panel {
 	}
 
 	public void affiche(List<ImageModel> lst, int depart) {
-		
+
 		this.removeAll();
-		
+		depart = depart - 3 ;
 		
 		if(lst.size() >= 1) {
 
-			for(int i = depart - 3 ; i < depart + 2 ; i++) {
-				
+			for(int i = depart ; i < depart + 5 ; i++) {
+
 				JPanel pane = new JPanel();
-				ImageIcon image1 = null;
+				int index = 0;
 				JLabel image = null;
 				ImageIcon newimage1 = null;
 				if(i < 0) {
-				
-					image1 = new ImageIcon("images/" + lst.get(lst.size() + i).getTitre() + ".jpg" );
+
+					image1[index] = new ImageIcon("images/" + lst.get(lst.size() + i).getTitre() + ".jpg" );
 
 				} else {
-					if(i > lst.size()) {
-						
-						image1 = new ImageIcon("images/" + lst.get(lst.size() - i).getTitre() + ".jpg" );
-						
+					if(i > lst.size()-1) {
+
+						image1[index] = new ImageIcon("images/" + lst.get(lst.size() - i).getTitre() + ".jpg" );
+
 					} else {
-						
-						image1 = new ImageIcon("images/" + lst.get(i).getTitre() + ".jpg" );
-						
+
+						image1[index] = new ImageIcon("images/" + lst.get(i).getTitre() + ".jpg" );
+
 					}
 				}
-				System.out.println(image1);
-				newimage1 = new ImageIcon(image1.getImage().getScaledInstance(image1.getIconWidth()*1/8,image1.getIconHeight()*1/8,Image.SCALE_DEFAULT));
+
+				newimage1 = new ImageIcon(image1[index].getImage().getScaledInstance(image1[index].getIconWidth()*1/8,image1[index].getIconHeight()*1/8,Image.SCALE_DEFAULT));
+				System.out.println(image1[index]);
+				index++;
 				image = new JLabel( newimage1);
 				pane.setBorder(BorderFactory.createLineBorder(Color.gray));
 				pane.add(image);
 				lis.add(pane);
 				lis.add(Box.createHorizontalStrut(5));
 			}
-			
+
 			p.add(lis,BorderLayout.CENTER);
 			this.add(p);
-		} else {
-			
-			JPanel pane = new JPanel();
-			ImageIcon image1 = new ImageIcon("images/" + lst.get(0).getTitre() + ".jpg" );
-			ImageIcon newimage1 = new ImageIcon(image1.getImage().getScaledInstance(image1.getIconWidth()*1/8,image1.getIconHeight()*1/8,Image.SCALE_DEFAULT));
-			JLabel image = new JLabel( newimage1);
-			pane.setBorder(BorderFactory.createLineBorder(Color.gray));
-			pane.add(image);
-			
-			lis.add(pane);
-			lis.add(Box.createHorizontalStrut(5));
-			
-			p.add(lis,BorderLayout.CENTER);
-			this.add(p);
+
 		}
-		
 	}
-	
+
+
+
+
+
 }

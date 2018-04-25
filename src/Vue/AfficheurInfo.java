@@ -103,9 +103,10 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 
 		if(evt.getActionCommand() == "suivant") {
-			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
+			String name = this.chanIm.nameImgSuivant(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);
 		}
+		this.repaint();
 
 	}
 
