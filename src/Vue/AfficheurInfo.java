@@ -35,7 +35,15 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	String [] co ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
 	Panel p = null;
 	Afficheurtri afftri =null;
-		
+	
+	ImageModel img = null;
+	TextField Taille = null; 
+	TextField sup = null;
+	TextField tit = null;
+	TextField tag = null;
+	TextField Couleur = null;
+	TextField not = null;
+
 	public AfficheurInfo(Afficheurtri tri) throws IOException {
 
 		this.mm = tri.mm;
@@ -44,70 +52,81 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		this.chanIm = tri.chanIm;
 		this.afftri = tri;
 		
-		p = new Panel();
-		BoxLayout layout = new BoxLayout(p,BoxLayout.PAGE_AXIS);
-		p.setLayout(layout);
-		layout.preferredLayoutSize(p);
-		p.setPreferredSize(new Dimension(300,550));
-		p.setBackground(new Color(153,153,153));
-		ImageModel img = tri.mold.lst_images.get(tri.chanIm.indexImg);
+		this.p = new Panel();
+		BoxLayout layout = new BoxLayout(this.p,BoxLayout.PAGE_AXIS);
+		this.p.setLayout(layout);
+		layout.preferredLayoutSize(this.p);
+		this.p.setPreferredSize(new Dimension(300,550));
+		this.p.setBackground(new Color(153,153,153));
 
 		JLabel info = new JLabel();
 		info.setText("INFORMATIONS");
 		info.setBorder(BorderFactory.createLineBorder(Color.white));
 		
-		TextField Taille = new TextField("");
-		Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
-		TextField Couleur = new TextField("");
-		for(int i=0;i<c.length;i++) {
-		if( img.FindColor(c[i])) {
-			Couleur.setText(Couleur.getText() +" "+ co[i]);
-			
-		}
+		this.Taille = new TextField("");
+		this.Couleur = new TextField("");
+		this.sup = new TextField("");
+		this.not = new TextField("");
+		this.tag = new TextField("");
+		this.tit = new TextField("");
 		
-		}
+		this.info(tri.mold.lst_images.get(tri.chanIm.indexImg));
 		
-		TextField sup = new TextField("");
-		sup.setText(new Sup(new Taille(img.getHeight(),img.getWidth())).toString());
-		TextField tit = new TextField();
-		tit.setText(img.getTitre().toString());
-		TextField tag = new TextField();
-		tag.setText(img.lst_tags.toString());
-		TextField not = new TextField();
-		not.setText(new Note(img.getNote()).toString());
 		JButton suivant = new JButton();
 		suivant.setBounds(1400,0 , 80, 20);
 		suivant.setText("suivant");
 		suivant.addActionListener(this);
-		p.add(info);
-		p.add(Taille);
-		p.add(Box.createVerticalStrut(5));
-		p.add(Couleur);
-		p.add(Box.createVerticalStrut(5));
-		p.add(sup);
-		p.add(Box.createVerticalStrut(5));
-		p.add(tit);
-		p.add(Box.createVerticalStrut(5));
-		p.add(tag);
-		p.add(Box.createVerticalStrut(5));
-		p.add(not);
-		p.add(Box.createVerticalStrut(5));
+		this.p.add(info);
+		this.p.add(Taille);
+		this.p.add(Box.createVerticalStrut(5));
+		this.p.add(Couleur);
+		this.p.add(Box.createVerticalStrut(5));
+		this.p.add(sup);
+		this.p.add(Box.createVerticalStrut(5));
+		this.p.add(tit);
+		this.p.add(Box.createVerticalStrut(5));
+		this.p.add(tag);
+		this.p.add(Box.createVerticalStrut(5));
+		this.p.add(not);
+		this.p.add(Box.createVerticalStrut(5));
 
-		p.add(suivant);
+		this.p.add(suivant);
+		this.add(this.p);
+	}
 
+	public void info(ImageModel img) {
+		
+		System.out.println(img.getTitre());
+		
+		this.Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
+		for(int i=0;i<c.length;i++) {
+			if( img.FindColor(c[i])) {
+				Couleur.setText(Couleur.getText() +" "+ co[i]);	
+			}
 
+		}
 
-		this.add(p);
-
+		
+		this.sup.setText(new Sup(new Taille(img.getHeight(),img.getWidth())).toString());
+		
+		this.tit.setText(img.getTitre().toString());
+		
+		this.tag.setText(img.lst_tags.toString());
+		
+		this.not.setText(new Note(img.getNote()).toString());
+		
+		
+		this.repaint();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		
+
 		if(evt.getActionCommand() == "suivant") {
 			String name = this.chanIm.nameImgSuivant(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);
-			
+			this.info(this.afftri.mold.lst_images.get(this.afftri.chanIm.indexImg));
+
 		}
 		this.repaint();
 

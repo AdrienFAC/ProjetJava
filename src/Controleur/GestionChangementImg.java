@@ -15,9 +15,9 @@ public class GestionChangementImg  {
 	GestionImg listImg;
 
 	public GestionChangementImg(MainModel lst ) throws IOException {
-		this.suivant = 4;
+		this.suivant = 2;
 		this.precedent = 2;
-		this.indexImg = 3;
+		this.indexImg = 2;
 	}
 
 	public void incrementation(GestionImg changementImg, boolean prece) {

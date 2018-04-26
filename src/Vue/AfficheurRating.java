@@ -42,9 +42,9 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 		p1.setBackground(new Color(153,153,153));
 		p1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		p1.setPreferredSize(new Dimension(400,50));
-		t1 = new TextField(" ");
+		t1 = new TextField("  ");
 		Label not = new Label();
-		not.setText("note sur 20");
+		not.setText("note sur 20 :");
 		
 		JButton ajouter = new JButton();
 		ajouter.setText("ajouter");
