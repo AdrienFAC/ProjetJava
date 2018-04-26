@@ -9,7 +9,7 @@ import Vue.GestionGr;
 
 public class GestionChangementImg  {
 
-	int  suivant;
+	public int  suivant;
 	int precedent;
 	public int indexImg;
 	GestionImg listImg;

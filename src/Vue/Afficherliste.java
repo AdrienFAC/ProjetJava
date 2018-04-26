@@ -1,12 +1,10 @@
 package Vue;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Panel;
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -17,100 +15,106 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Controleur.GestionTriImg;
-import Modele.ImageModel;
 import Modele.MainModel;
-
+import Modele.ImageModel;
 
 public class Afficherliste extends Panel {
 
-	JPanel lis;
-	Panel p;
-	ImageIcon[] image1 = new ImageIcon[5];
+	int taille = 5;
+
+	ImageIcon[] image = null;
+	ImageIcon[] newimage = null;
+	JLabel[] img = null;
+	Panel p = null;
+	JPanel lis = null;
+	JPanel[] pane = null;
 	public MainModel mold;
 	List<ImageModel> lst;
+	public int indexAffiche;
 
-	public Afficherliste(AfficheurImage img) throws IOException {
+
+	public Afficherliste(AfficheurImage img) {
 
 		this.mold = img.main;
+		this.lst = img.main.lst_images;
+		
 		this.p = new Panel();
-		this.p.setPreferredSize(new Dimension(900,100));
-		this.p.setLayout(new BorderLayout());
+	
+		this.image = new ImageIcon[this.taille];
+		this.newimage = new ImageIcon[this.taille];
+		this.img = new JLabel[this.taille];
+		this.pane = new JPanel[this.taille];
+
+
 		this.lis = new JPanel();
 		this.lis.setLayout(new BoxLayout(lis, BoxLayout.LINE_AXIS));
-		this.lst = img.main.lst_images;
-		affiche(3);
+		
+		this.infoImg(3);
+		
+		this.p.add(lis,BorderLayout.CENTER);
 
+		this.add(p);
 
 
 	}
-
-	public void affiche(int depart) {
-
+	
+	public void changeList(int indexAffiche) {
+		
 		this.removeAll();
+		
+		this.p = new Panel();
+		
+		this.image = new ImageIcon[this.taille];
+		this.newimage = new ImageIcon[this.taille];
+		this.img = new JLabel[this.taille];
+		this.pane = new JPanel[this.taille];
+
+
+		this.lis = new JPanel();
+		this.lis.setLayout(new BoxLayout(lis, BoxLayout.LINE_AXIS));
+		
+		this.infoImg(indexAffiche);
+		
+		this.p.add(lis,BorderLayout.CENTER);
+
+		this.add(p);
+		
+		this.repaint();
+	}
+
+	public void infoImg(int depart) {
+		
+		this.remove(this.lis);
+		
 		depart = depart - 3 ;
+		int index = 0;
 
 		for(int i = depart ; i < depart + 5 ; i++) {
 
-			JPanel pane = new JPanel();
-			int index = 0;
-			JLabel image = null;
-			ImageIcon newimage1 = null;
 			if(i < 0) {
 
-				image1[index] = new ImageIcon("images/" + lst.get(lst.size() + i).getTitre() + ".jpg" );
+				this.image[index] = new ImageIcon("images/" + this.lst.get(lst.size() + i).getTitre() + ".jpg" );
 
 			} else {
 				if(i > lst.size()-1) {
 
-					image1[index] = new ImageIcon("images/" + lst.get(lst.size() - i).getTitre() + ".jpg" );
+					this.image[index] = new ImageIcon("images/" + this.lst.get(lst.size() - i).getTitre() + ".jpg" );
 
 				} else {
 
-					image1[index] = new ImageIcon("images/" + lst.get(i).getTitre() + ".jpg" );
+					this.image[index] = new ImageIcon("images/" + this.lst.get(i).getTitre() + ".jpg" );
 
 				}
 			}
-
-			newimage1 = new ImageIcon(image1[index].getImage().getScaledInstance(image1[index].getIconWidth()*1/8,image1[index].getIconHeight()*1/8,Image.SCALE_DEFAULT));
+			this.newimage[index] = new ImageIcon(this.image[index].getImage().getScaledInstance(this.image[index].getIconWidth()*1/8,this.image[index].getIconHeight()*1/8,Image.SCALE_DEFAULT));
+			this.img[index] = new JLabel(this.newimage[index]);
+			this.pane[index] = new JPanel();
+			this.pane[index].setBorder(BorderFactory.createLineBorder(Color.gray));
+			this.pane[index].add(this.img[index]);
+			this.lis.add(this.pane[index]);
+			this.lis.add(Box.createHorizontalStrut(5));
 			index++;
-			image = new JLabel( newimage1);
-			pane.setBorder(BorderFactory.createLineBorder(Color.gray));
-			pane.add(image);
-			lis.add(pane);
-			lis.add(Box.createHorizontalStrut(5));
-
-
-			p.add(lis,BorderLayout.CENTER);
-			this.add(p);
-
 		}
-	}
-
-	public void afficherIndex(int[] tab) {
 		
-		this.removeAll();
-
-		for(int i = 0 ; i < 5 ; i++) {
-
-			JPanel pane = new JPanel();
-			int index = 0;
-			JLabel image = null;
-			ImageIcon newimage1 = null;
-			image1[i] = new ImageIcon("images/" + lst.get(tab[i]).getTitre() + ".jpg" );
-			newimage1 = new ImageIcon(image1[i].getImage().getScaledInstance(image1[i].getIconWidth()*1/8,image1[i].getIconHeight()*1/8,Image.SCALE_DEFAULT));
-			image = new JLabel( newimage1);
-			pane.setBorder(BorderFactory.createLineBorder(Color.gray));
-			pane.add(image);
-			lis.add(pane);
-			lis.add(Box.createHorizontalStrut(5));
-
-
-			p.add(lis,BorderLayout.CENTER);
-			this.add(p);
-			}
-
 	}
-
-
 }

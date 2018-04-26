@@ -95,9 +95,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	}
 
 	public void info(ImageModel img) {
-		
-		System.out.println(img.getTitre());
-		
+				
 		this.Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
 		for(int i=0;i<c.length;i++) {
 			if( img.FindColor(c[i])) {

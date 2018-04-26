@@ -161,7 +161,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 			String name = "images/"+tit.getSelectedItem()+".jpg";
 			imDef.im_default = name;
 			imDef.changeImgDefault(name);
-			this.list.affiche(this.chanIm.indexImg);
+			this.list.infoImg(this.chanIm.indexImg);
 			
 		}
 
@@ -182,7 +182,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 			if(lst.size() > 0) {
 				String name = "images/"+lst.get(0).getTitre()+".jpg";
 				imDef.changeImgDefault(name);
-				this.list.affiche(this.chanIm.indexImg);
+				this.list.infoImg(this.chanIm.indexImg);
 			}
 		}
 
@@ -192,7 +192,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 			if(lst.size() > 0) {
 				String name = "images/"+lst.get(0).getTitre()+".jpg";
 				imDef.changeImgDefault(name);
-				this.list.affiche(this.chanIm.indexImg);
+				this.list.infoImg(this.chanIm.indexImg);
 			}
 			
 		}
@@ -204,7 +204,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 			if(lst.size() > 0) {
 				String name = "images/"+lst.get(0).getTitre()+".jpg";
 				imDef.changeImgDefault(name);
-				this.list.affiche(this.chanIm.indexImg);
+				this.list.infoImg(this.chanIm.indexImg);
 			}
 
 		}
@@ -217,7 +217,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 		if(evt.getActionCommand() == "precedent") {
 			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);
-			this.list.affiche(this.chanIm.indexImg);
+			this.list.changeList(this.chanIm.suivant);
 		}
 	}
 }

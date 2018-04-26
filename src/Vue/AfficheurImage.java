@@ -43,9 +43,10 @@ public class AfficheurImage extends Panel {
 		
 		this.setPreferredSize(new Dimension(200,200));
 		try {
-			this.im = ImageIO.read(new File(name));
+			this.im_default = name;
+			this.im = ImageIO.read(new File(this.im_default));
 		}catch (IOException e) {
-			throw new RuntimeException("L'image" + im_default + "n'est pas dans la banque de données");
+			throw new RuntimeException("L'image" + this.im_default + "n'est pas dans la banque de données");
 
 		}
 		

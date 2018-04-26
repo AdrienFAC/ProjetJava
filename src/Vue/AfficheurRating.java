@@ -71,7 +71,12 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 	public void actionPerformed(ActionEvent evt) {
 		if(evt.getActionCommand() == "enregistrement") {
 			if(this.note <= 20 || this.note >= 0 ) {
-				this.nota.ChangeNote(this.note );
+				this.nota.ChangeNote(this.note);
+				int index = this.defIm.main.IsPresentInList(this.defIm.main.lst_images, this.defIm.im_default);
+				String name = this.defIm.main.lst_images.get(index).getTitre();
+				name.replace("images/", "");
+				name.replace(".jpg", ".xml");
+				this.defIm.main.serialize(name);
 			}
 		}
 	}
