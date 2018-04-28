@@ -35,6 +35,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	String [] co ={"bleu","rouge","vert","jaune","rose","orange","magenta","cyan"};
 	Panel p = null;
 	Afficheurtri afftri =null;
+	Afficherliste lis = null;
 	
 	ImageModel img = null;
 	TextField Taille = null; 
@@ -50,6 +51,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		this.mold = tri.mold;
 		this.imDef = tri.imDef;
 		this.chanIm = tri.chanIm;
+		this.lis = tri.list;
 		this.afftri = tri;
 		
 		this.p = new Panel();
@@ -124,9 +126,9 @@ public class AfficheurInfo extends Panel implements ActionListener {
 			String name = this.chanIm.nameImgSuivant(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);
 			this.info(this.afftri.mold.lst_images.get(this.afftri.chanIm.indexImg));
-
+			this.lis.indexAffiche = this.chanIm.suivant + 1;
+			this.lis.changeList();
 		}
-		this.repaint();
 
 	}
 

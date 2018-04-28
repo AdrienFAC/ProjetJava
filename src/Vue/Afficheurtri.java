@@ -43,7 +43,7 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 	public GestionImg mm = null;
 	GestionTriImg im = null;
 	public MainModel mold = null;
-	Afficherliste list = null;
+	public Afficherliste list = null;
 	public AfficheurImage imDef = null;
 	ImageModel imm = null;
 	GestionChangementImg chanIm = null;
@@ -217,7 +217,9 @@ public class Afficheurtri extends Panel implements ActionListener, ItemListener 
 		if(evt.getActionCommand() == "precedent") {
 			String name = this.chanIm.nameImgPrecedent(mm, mold, imDef);
 			this.imDef.changeImgDefault(name);
-			this.list.changeList(this.chanIm.suivant);
+			this.list.indexAffiche = this.chanIm.indexImg + 1;
+			this.list.changeList();
+			
 		}
 	}
 }

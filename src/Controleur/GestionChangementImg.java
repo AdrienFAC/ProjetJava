@@ -10,7 +10,7 @@ import Vue.GestionGr;
 public class GestionChangementImg  {
 
 	public int  suivant;
-	int precedent;
+	public int precedent;
 	public int indexImg;
 	GestionImg listImg;
 
@@ -32,11 +32,12 @@ public class GestionChangementImg  {
 					this.suivant = 0 ;
 				}
 			}
+			if(this.indexImg == 0) {
+				this.indexImg = changementImg.choixImg.size() -1;
+			} 
 			this.indexImg--;
-			if(this.indexImg < 0) {
-				this.indexImg = changementImg.choixImg.size()-1;
-			}
-			
+
+
 		} else {
 			if (this.suivant == changementImg.choixImg.size()-1) {
 				this.suivant = 0;
@@ -48,25 +49,28 @@ public class GestionChangementImg  {
 					this.precedent = changementImg.choixImg.size()-1;
 				}
 			}
-			this.indexImg++;
-			if(this.indexImg > changementImg.choixImg.size()-1) {
-				this.indexImg = 0;
+			
+			if(this.indexImg == changementImg.choixImg.size()-2) {
+				this.indexImg = -1;
 			}
+			this.indexImg++;
 		}
+
+		System.out.println(indexImg);
 	}
 
 	public String nameImgPrecedent(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 
 
 		this.incrementation(changementImg, true);
-		return "images/" + changementImg.nameImg(lst, this.precedent) +".jpg";
+		return "images/" + changementImg.nameImg(lst, this.indexImg) +".jpg";
 
 	}
 
 	public String nameImgSuivant(GestionImg changementImg, MainModel lst, AfficheurImage img) {
 
 		this.incrementation(changementImg, false);
-		return "images/" + changementImg.nameImg(lst, this.suivant) +".jpg";		
+		return "images/" + changementImg.nameImg(lst, this.indexImg) +".jpg";		
 	}
 
 
