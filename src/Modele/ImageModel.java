@@ -1,5 +1,3 @@
-package Modele;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -19,7 +17,7 @@ import javax.imageio.ImageIO;
 
 public class ImageModel
 {
-	public BufferedImage image;
+	public transient BufferedImage image;
 	public Dimension taille;
 	public String titre;
 	public List<String> lst_tags;

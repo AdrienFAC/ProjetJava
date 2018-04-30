@@ -1,5 +1,3 @@
-package Modele;
-
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -17,16 +15,6 @@ import javax.swing.JPanel;
 public class MainModel
 {
 	public List<ImageModel> lst_images;
-
-	public void Debug()
-	{
-		for (ImageModel img : this.lst_images)
-		{
-			System.out.println("[" + img.titre + "]");
-			System.out.println("Note: " + img.note);
-			System.out.println();	
-		}
-	}
 
 	public void SortByMark(List<ImageModel> lst)
 	{
@@ -51,9 +39,6 @@ public class MainModel
 	public static void main(String[] args) throws IOException
 	{
 		MainModel projet = new MainModel();
-		//projet.serialize("tmp.xml");
-		//projet.deserialize("tmp.xml");
-		//projet.Debug();
 	}
 	
 	static List<ImageModel> loadImages(String path) throws IOException
@@ -107,7 +92,6 @@ public class MainModel
 				decoder.close();
 			}
 		}
-		
 		for (ImageModel img : tmp_lst)
 		{
 			int exist = -1;
