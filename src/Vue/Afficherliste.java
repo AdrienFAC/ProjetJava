@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controleur.GestionChangementImg;
+import Controleur.GestionImg;
 import Modele.MainModel;
 import Modele.ImageModel;
 
@@ -26,76 +28,97 @@ public class Afficherliste extends Panel {
 	JPanel lis = null;
 	public MainModel mold;
 	List<ImageModel> lst;
-	public int indexAffiche = 3;
+	int indexAffiche;
+	int[] choixIndex = null;
+
+	GestionChangementImg chan = null ;
+	GestionImg ges = null;
 
 
-	public Afficherliste(AfficheurImage img) {
+	public Afficherliste(AfficheurImage img, GestionChangementImg gesImg, GestionImg g) {
 
 		this.mold = img.main;
+		this.ges = g;
+		this.chan = gesImg;
+
 		this.lst = img.main.lst_images;
-		
+		this.indexAffiche = this.ges.indexActu;
+		this.choixIndex = this.chan.indexImg;
+
 		this.changeList();
-		
+
 
 
 	}
-	
+
 	public void changeList() {
-		
-		this.removeAll();
+
 		this.p.removeAll();
-		
-		this.lis = this.infoImg(this.indexAffiche);
-		
+
+		this.lis = this.infoImg();
+
 		this.p.add(this.lis,BorderLayout.CENTER);
 
 		this.add(this.p);
-		
+
 		this.p.repaint();
-		this.repaint();
-		
+
 	}
 
-	public JPanel infoImg(int depart) {
+	public int[] indexAffiche() {
+
+		int taille;
+		if(this.chan.indexImg.length >= 5) {
+			taille = 5;
+		} else {
+			taille = this.chan.indexImg.length; 
+
+		}
 		
-		
-		depart = depart - 3 ;
-		int index = 0;
+		int[] index = new int[taille];
+		int depart = this.ges.indexActu - 2;
+		for(int i = 0; i < taille; i++) {
+			if(depart < 0) {
+				index[i] = this.choixIndex.length - (this.choixIndex.length + depart);
+			} else {
+				if(depart > this.choixIndex.length - 1) {
+					index[i] = this.choixIndex.length - 1 - depart;
+				} else {
+					index[i] = depart;
+				}
+			}
+			if(depart > this.choixIndex.length - 1 ) {
+				depart--;
+			} else {
+				depart++;
+			}
+		}
+		return index;
+	}
+
+	public JPanel infoImg() {
+
+
+		int[] indexImg = this.indexAffiche();
 		JPanel liste = new JPanel();
 		liste.setLayout(new BoxLayout(liste, BoxLayout.LINE_AXIS));
 		ImageIcon[] image = new ImageIcon[this.taille];
 		ImageIcon[] newimage = new ImageIcon[this.taille];
 		JLabel[] img = new JLabel[this.taille];
 		JPanel[] pane = new JPanel[this.taille];
-		
-		for(int i = depart ; i < depart + 5 ; i++) {
-			
-			if(i < 0) {
 
-				image[index] = new ImageIcon("images/" + this.lst.get(lst.size() + i).getTitre() + ".jpg" );
+		for(int i = 0 ; i < indexImg.length ; i++) {
 
-			} else {
-				if(i > lst.size()-1) {
-
-					image[index] = new ImageIcon("images/" + this.lst.get(lst.size() - i).getTitre() + ".jpg" );
-
-				} else {
-
-					image[index] = new ImageIcon("images/" + this.lst.get(i).getTitre() + ".jpg" );
-
-				}
-			}
-			newimage[index] = new ImageIcon(image[index].getImage().getScaledInstance(image[index].getIconWidth()*1/8,image[index].getIconHeight()*1/8,Image.SCALE_DEFAULT));
-			img[index] = new JLabel(newimage[index]);
-			pane[index] = new JPanel();
-			pane[index].setBorder(BorderFactory.createLineBorder(Color.gray));
-			pane[index].add(img[index]);
-			liste.add(pane[index]);
+			image[i] = new ImageIcon("images/" + this.lst.get(indexImg[i]).getTitre() + ".jpg" );
+			newimage[i] = new ImageIcon(image[i].getImage().getScaledInstance(image[i].getIconWidth()*1/8,image[i].getIconHeight()*1/8,Image.SCALE_DEFAULT));
+			img[i] = new JLabel(newimage[i]);
+			pane[i] = new JPanel();
+			pane[i].setBorder(BorderFactory.createLineBorder(Color.gray));
+			pane[i].add(img[i]);
+			liste.add(pane[i]);
 			liste.add(Box.createHorizontalStrut(5));
-			index++;
 		}
-		System.out.println();
-		
+
 		return liste;
 	}
 }

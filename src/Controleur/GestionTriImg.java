@@ -96,5 +96,11 @@ public class GestionTriImg {
 		return this.lst_tri;
 	}
 	
+	public List<ImageModel> aucunTri(){
+		
+		return this.lst_actu;
+		
+	}
+	
 }
 

@@ -9,22 +9,22 @@ import Vue.GestionGr;
 
 public class GestionNote {
 	
-	MainModel modele = null ;
+	GestionImg g = null ;
+	MainModel mold = null;
 	GestionChangementImg im = null;
 	
-	public GestionNote(MainModel mold, GestionChangementImg imChange) {
+	public GestionNote(GestionImg ges) {
 		
-		this.modele = mold;
-		this.im = imChange;
+		this.g = ges;
+		this.mold = this.g.mold;
+		//this.im = imChange;
 	
 	}
 	
 	public void ChangeNote( int n ) {
 		
-		int i = this.im.indexImg;
-		this.modele.lst_images.get(i).setNote(n);
+		this.mold.lst_images.get(this.g.indexActu).setNote(n);
 		
-		System.out.println(this.modele.lst_images.get(i).getNote());
 	}
 	
 	

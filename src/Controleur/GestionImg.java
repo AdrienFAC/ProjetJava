@@ -11,31 +11,35 @@ import Vue.GestionGr;
 public class GestionImg {
 
 	public List<Modele.ImageModel> choixImg;
+	public MainModel mold = null;
+	public int indexActu;
 	String titre;
 
 
 	public GestionImg(MainModel lst) throws IOException {
 		
+		this.mold = lst;
 		this.choixImg = lst.lst_images;
+		this.indexActu = this.choixImg.size()/2;
 		
 	}
 
 
-	public int indexOfImg(MainModel lst , AfficheurImage imgActu) {
+	public int indexOfImg(AfficheurImage imgActu) {
 
 		this.titre = imgActu.im_default.replaceAll("imges/", "");
 		this.titre = imgActu.im_default.replaceAll(".jpg", "");
-		return lst.IsPresentInList(this.choixImg, this.titre);
+		return this.mold.IsPresentInList(this.choixImg, this.titre);
 
 	}
 
-	public String nameImg(MainModel lst, int i) {
+	public String nameImg(int i) {
 
-		return lst.IsPresentInList(this.choixImg, i);
+		return this.mold.IsPresentInList(this.choixImg, i);
 
 	}
 
-	public String tailleImg(MainModel lst, int i) {
+	public String tailleImg(int i) {
 
 		if (this.choixImg.get(i).taille.width >= 4000) {
 
@@ -53,13 +57,13 @@ public class GestionImg {
 
 	}
 
-	public List<String> tagImg(MainModel lst , int i) {
+	public List<String> tagImg( int i) {
 
 		return this.choixImg.get(i).lst_tags;
 
 	}
 
-	public void changeImg(MainModel lst, AfficheurImage imgActu,  String t) {
+	public void changeImg( AfficheurImage imgActu,  String t) {
 
 		this.titre = "images/" + t + ".jpg";
 		imgActu.im_default = this.titre ;

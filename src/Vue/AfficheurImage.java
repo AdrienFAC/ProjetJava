@@ -21,13 +21,13 @@ public class AfficheurImage extends Panel {
 	public ImageModel mold = null;
 	public MainModel main = null;
 
-	public AfficheurImage(ImageModel m, MainModel mm){
+	public AfficheurImage(ImageModel m, MainModel mm, GestionImg g){
 		super();
 		this.mold = m;
 		this.main = mm;
 		this.setPreferredSize(new Dimension(200,200));
 		this.setBackground(Color.DARK_GRAY);
-		this.im_default = "images/"+this.main.lst_images.get(2).getTitre() +".jpg";
+		this.im_default = "images/"+this.main.lst_images.get(g.indexActu).getTitre() +".jpg";
 		try {
 			this.im = ImageIO.read(new File(im_default));
 		}catch (IOException e) {

@@ -38,20 +38,20 @@ public class GestionGr extends Frame implements WindowListener{
 		this.modl = new ImageModel();
 		this.ges = new GestionImg(mm);
 		this.tri = new GestionTriImg(mm);
-		this.changeImg = new GestionChangementImg(mm);
-		this.not = new GestionNote(mm, changeImg);
+		this.changeImg = new GestionChangementImg(ges);
+		this.not = new GestionNote(ges);
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1500,1000));
 		
-		AfficheurImage panneauH = new AfficheurImage(modl, mm);
+		AfficheurImage panneauH = new AfficheurImage(modl, mm, ges);
 		this.add(panneauH, BorderLayout.CENTER);
 		
 		AfficheurRating panneauG = new AfficheurRating(panneauH, not);
 		this.add(panneauG, BorderLayout.NORTH);
 
 		
-		Afficherliste panneaub = new Afficherliste(panneauH);
+		Afficherliste panneaub = new Afficherliste(panneauH, changeImg, ges);
 		this.add(panneaub, BorderLayout.SOUTH);
 		
 		Afficheurtri panneaug = new Afficheurtri(panneauH, panneaub, ges, tri, changeImg);

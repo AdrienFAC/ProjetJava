@@ -52,6 +52,7 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 		JButton enregistrement = new JButton();
 		enregistrement.setText("enregistrement");
 		
+		
 		p1.add(ajouter);
 		p1.add(enregistrement);
 		p.add(p1);
@@ -62,6 +63,7 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 		this.add(p);
 		t1.addTextListener(this);
 		enregistrement.addActionListener(this);
+		
 		
 		}
 
@@ -79,6 +81,7 @@ public class AfficheurRating extends Panel implements ActionListener, TextListen
 				this.defIm.main.serialize(name);
 			}
 		}
+		
 	}
 
 

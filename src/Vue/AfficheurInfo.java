@@ -72,7 +72,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 		this.tag = new TextField("");
 		this.tit = new TextField("");
 		
-		this.info(tri.mold.lst_images.get(tri.chanIm.indexImg));
+		this.info(tri.mold.lst_images.get(this.afftri.mm.indexActu));
 		
 		JButton suivant = new JButton();
 		suivant.setBounds(1400,0 , 80, 20);
@@ -97,6 +97,7 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	}
 
 	public void info(ImageModel img) {
+		
 				
 		this.Taille.setText(new Taille(img.getHeight(),img.getWidth()).toString());
 		for(int i=0;i<c.length;i++) {
@@ -123,10 +124,10 @@ public class AfficheurInfo extends Panel implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 
 		if(evt.getActionCommand() == "suivant") {
-			String name = this.chanIm.nameImgSuivant(mm, mold, imDef);
+			String name = this.chanIm.nameImgSuivant(mm, imDef);
 			this.imDef.changeImgDefault(name);
-			this.info(this.afftri.mold.lst_images.get(this.afftri.chanIm.indexImg));
-			this.lis.indexAffiche = this.chanIm.suivant + 1;
+			this.info(this.afftri.mold.lst_images.get(this.afftri.mm.indexActu));
+			this.lis.indexAffiche = this.afftri.mm.indexActu + 1;
 			this.lis.changeList();
 		}
 

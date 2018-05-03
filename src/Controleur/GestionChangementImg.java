@@ -9,69 +9,54 @@ import Vue.GestionGr;
 
 public class GestionChangementImg  {
 
-	public int  suivant;
-	public int precedent;
-	public int indexImg;
-	GestionImg listImg;
+	
+	public int[] indexImg = null;
+	MainModel mold = null;
+	GestionImg g = null;
 
-	public GestionChangementImg(MainModel lst ) throws IOException {
-		this.suivant = 2;
-		this.precedent = 2;
-		this.indexImg = 2;
-	}
-
-	public void incrementation(GestionImg changementImg, boolean prece) {
-		if(prece == true) {
-			if (this.precedent == 0) {
-				this.precedent = changementImg.choixImg.size() - 1;
-				this.suivant = 0 ;
-			} else {
-				this.precedent--;
-				this.suivant = this.precedent + 2;
-				if(this.suivant > changementImg.choixImg.size() - 1 ) {
-					this.suivant = 0 ;
-				}
-			}
-			if(this.indexImg == 0) {
-				this.indexImg = changementImg.choixImg.size() -1;
-			} 
-			this.indexImg--;
-
-
-		} else {
-			if (this.suivant == changementImg.choixImg.size()-1) {
-				this.suivant = 0;
-				this.precedent = changementImg.choixImg.size()-1 ;
-			} else {
-				this.suivant ++;
-				this.precedent = this.suivant - 2;
-				if(this.precedent < 0) {
-					this.precedent = changementImg.choixImg.size()-1;
-				}
-			}
-			
-			if(this.indexImg == changementImg.choixImg.size()-2) {
-				this.indexImg = -1;
-			}
-			this.indexImg++;
+	public GestionChangementImg(GestionImg ges) throws IOException {
+		
+		this.g = ges;
+		this.mold = this.g.mold;
+		this.indexImg = new int[this.mold.lst_images.size()-1];
+		for(int i = 0; i < this.mold.lst_images.size()-1;i++) {
+			this.indexImg[i] = i;
 		}
-
-		System.out.println(indexImg);
 	}
 
-	public String nameImgPrecedent(GestionImg changementImg, MainModel lst, AfficheurImage img) {
+	public void incrementation(boolean prece) {
+		if(prece) {
+			if(this.g.indexActu > this.indexImg[0]) {
+				this.g.indexActu--;
+			} else {
+				this.g.indexActu = this.indexImg[this.indexImg.length-1];
+			}
+		} else {
+			if(this.g.indexActu < this.indexImg[this.indexImg.length-1]) {
+				this.g.indexActu++;
+			} else {
+				this.g.indexActu = this.indexImg[0];
+			}
+		}
+		System.out.println(this.g.indexActu);
+	}
+	
+	public String nameImgPrecedent(GestionImg changementImg, AfficheurImage img) {
 
 
-		this.incrementation(changementImg, true);
-		return "images/" + changementImg.nameImg(lst, this.indexImg) +".jpg";
+		this.incrementation(true);
+		return "images/" + changementImg.nameImg(this.g.indexActu) +".jpg";
+
+	}
+	
+	public String nameImgSuivant(GestionImg changementImg, AfficheurImage img) {
+
+
+		this.incrementation(false);
+		return "images/" + changementImg.nameImg(this.g.indexActu) +".jpg";
 
 	}
 
-	public String nameImgSuivant(GestionImg changementImg, MainModel lst, AfficheurImage img) {
-
-		this.incrementation(changementImg, false);
-		return "images/" + changementImg.nameImg(lst, this.indexImg) +".jpg";		
-	}
 
 
 }
