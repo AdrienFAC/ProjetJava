@@ -127,7 +127,6 @@ public class AfficheurInfo extends Panel implements ActionListener {
 			String name = this.chanIm.nameImgSuivant(mm, imDef);
 			this.imDef.changeImgDefault(name);
 			this.info(this.afftri.mold.lst_images.get(this.afftri.mm.indexActu));
-			this.lis.indexAffiche = this.afftri.mm.indexActu + 1;
 			this.lis.changeList();
 		}
 

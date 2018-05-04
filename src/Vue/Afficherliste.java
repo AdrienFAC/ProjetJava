@@ -79,7 +79,7 @@ public class Afficherliste extends Panel {
 		int depart = this.ges.indexActu - 2;
 		for(int i = 0; i < taille; i++) {
 			if(depart < 0) {
-				index[i] = this.choixIndex.length - (this.choixIndex.length + depart);
+				index[i] = this.choixIndex.length + depart;
 			} else {
 				if(depart > this.choixIndex.length - 1) {
 					index[i] = this.choixIndex.length - 1 - depart;
@@ -87,11 +87,16 @@ public class Afficherliste extends Panel {
 					index[i] = depart;
 				}
 			}
-			if(depart > this.choixIndex.length - 1 ) {
+			if(depart > this.choixIndex[this.choixIndex.length -2] ) {
 				depart--;
 			} else {
-				depart++;
-			}
+				if(i > 0 && index[i-1] == this.choixIndex.length) {
+					depart = this.choixIndex[0] ;
+				} else {
+					depart++;
+				}
+					
+			}	
 		}
 		return index;
 	}

@@ -32,13 +32,12 @@ public class GestionChangementImg  {
 				this.g.indexActu = this.indexImg[this.indexImg.length-1];
 			}
 		} else {
-			if(this.g.indexActu < this.indexImg[this.indexImg.length-1]) {
+			if(this.g.indexActu < this.indexImg[this.indexImg.length-2]) {
 				this.g.indexActu++;
 			} else {
 				this.g.indexActu = this.indexImg[0];
 			}
 		}
-		System.out.println(this.g.indexActu);
 	}
 	
 	public String nameImgPrecedent(GestionImg changementImg, AfficheurImage img) {
